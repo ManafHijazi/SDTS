@@ -1,0 +1,69 @@
+@import 'src/Assets/Styles/Helpers/Helpers.Style.scss';
+
+.side-menu-wrapper {
+  overflow: hidden;
+  position: sticky;
+  left: -2rem;
+  top: 0;
+  width: 0;
+  min-width: 0;
+  opacity: 0;
+  z-index: 9;
+  background-color: white;
+  border-right: 1px solid $c-gray-border;
+  transition: all 0.18s ease-in-out;
+
+  .MuiTouchRipple-root {
+    margin: 0 !important;
+  }
+
+  &.is-open {
+    width: 15%;
+    min-width: 15rem;
+    left: 0;
+    opacity: 1;
+  }
+
+  .side-menu-content {
+    padding-top: 5rem;
+    width: 100%;
+    min-width: 10rem;
+
+    .side-menu-title {
+      font-size: 16px;
+      color: $c-gray-dark;
+      padding: 1rem;
+      padding-left: 2rem;
+    }
+
+    .side-menu-items {
+      .side-menu-item {
+        display: flex;
+        align-items: center;
+
+        .MuiButtonBase-root {
+          width: 100%;
+          padding: 1rem;
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          padding-left: 2rem;
+          font-weight: lighter;
+        }
+
+        span {
+          color: $c-red-dark;
+          margin-right: 0.5rem;
+        }
+
+        &.is-active {
+          .MuiButtonBase-root {
+            font-weight: bold;
+            font-family: $ff-semibold;
+            color: black;
+          }
+        }
+      }
+    }
+  }
+}
