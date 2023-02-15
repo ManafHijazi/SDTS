@@ -3,15 +3,16 @@
 .main-layout-wrapper {
   display: flex;
   position: relative;
+  width: 100%;
 
   .container-wrapper {
+    padding: 2rem;
     min-height: 100vh;
     width: 100%;
-    padding-top: 4rem;
     transition: all 0.18s ease-in-out;
 
     &.is-open {
-      width: 85%;
+      width: 87%;
     }
 
     .home-views-wrapper {

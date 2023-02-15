@@ -1,417 +1,74 @@
 @import 'src/Assets/Styles/Helpers/Helpers.Style.scss';
 
-.menu-popover-item-btn-wrapper {
-  padding: 4px 15px !important;
-  font-size: 12px;
-}
-
-.header-menu-popover-conteaner {
-  display: inline;
-
-  .css-10d1a0h-MuiButtonBase-root {
-    justify-content: normal !important;
-
-    &.is-active {
-      background-color: $c-primary;
-      color: $c-white;
-      font-weight: bolder;
-    }
-  }
-}
-
 .header-wrapper {
+  padding-bottom: 2rem;
+  padding-top: 0.5rem;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  box-shadow: $bs-secondary;
-  width: 100%;
-  position: fixed;
-  top: 0;
-  min-height: 4rem;
-  background-color: #333333;
-  color: $c-white;
-  z-index: 99;
+  justify-content: space-between;
 
-  .header-side-menu-action {
-    display: flex;
-    align-items: center;
-
-    .MuiButtonBase-root {
-      color: $c-red-dark;
-      border-radius: 50%;
-      padding: 0.5rem;
-      width: 2.5rem;
-      height: 2.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-  }
-
-  .header-content-wrapper {
-    @include d-flex-v-center-h-between;
-    //max-width: 1220px;
-    width: 100%;
-  }
-
-  .section {
-    padding: 0.5rem;
-    height: 3.3rem;
-    @include d-inline-flex-v-center;
-  }
-
-  .header-logo-wrapper {
-    font-size: 18px;
+  .header-title {
+    font-size: 26px;
+    padding-bottom: 0.5rem;
     font-weight: bold;
-    font-family: $ff-semibold;
+    font-family: $ff-extrabold;
+    color: $c-primary-dark;
+  }
+  .header-subtitle {
+    font-size: 16px;
+    color: $c-gray-dark;
+  }
+
+  .header-btns {
     display: flex;
     align-items: center;
-    transition: font-size 0.18s ease-in-out;
 
-    .vertical-line {
-      padding-left: 1rem;
+    .notifications-btn-wrapper {
       padding-right: 1rem;
-      font-size: 14px;
-      font-weight: normal;
-    }
 
-    .company-name-wrapper {
-      font-size: 14px;
-      font-weight: normal;
-      text-transform: capitalize;
-    }
-
-    @media (max-width: 767px) {
-      font-size: 16px;
-
-      .company-name-wrapper {
-        font-size: 12px;
-      }
-    }
-
-    @media (max-width: 700px) {
-      font-size: 14px;
-    }
-  }
-
-  .middle-section-wrapper {
-    width: 100%;
-    justify-content: space-between;
-    position: relative;
-
-    .header-menu-wrapper {
-      @include d-flex-center;
-      width: 100%;
-
-      .header-menu-btn {
-        &:hover {
-          background-color: rgba($c-white, 0.25);
-        }
-
-        &.is-active {
-          background-color: $c-gray-lightest;
-          color: $c-gray-primary;
-        }
-      }
-
-      @include laptops-max {
-        display: none;
-      }
-    }
-
-    .header-menu-open-btn {
-      display: none;
-      margin: 0 0.5rem;
-      @include laptops-max {
-        @include d-inline-flex;
-      }
-    }
-
-    .header-search-wrapper {
-      position: absolute;
-      right: 0;
-      color: white;
-      background-color: #3b3b3b;
-      margin-right: 10px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 12px;
-      cursor: pointer;
-      border-radius: 8px;
-      @include rtl {
-        right: initial;
-        left: 0;
-      }
-    }
-  }
-
-  .last-section-wrapper {
-    .header-actions-wrapper {
-      @include d-flex;
-      margin-right: -0.5rem;
-      @include laptops-l-max {
-        display: none;
-      }
-      @include rtl {
-        margin-right: 0;
-        margin-left: -0.5rem;
-      }
-
-      .header-action-item-wrapper {
-        position: relative;
-        @include d-flex-center;
-
-        .MuiBadge-badge {
-          background-color: $c-red;
-        }
-
-        color: white;
-        background-color: #3a3a3a;
-        margin-right: 10px;
-        font-size: 12px;
-        cursor: pointer;
-        border-radius: 8px;
-
-        .MuiButtonBase-root {
-          width: 2rem;
-          height: 2rem;
-        }
-      }
-    }
-
-    .btns-header-actions {
-      display: none;
-      @include laptops-l-max {
-        @include d-inline-flex;
-      }
-
-      &.is-active {
-        color: $c-white;
-      }
-    }
-
-    .TaskMenu-menu-collapse-wrapper {
-      border-radius: 0.5rem;
-      background-color: $c-white;
-      box-shadow: $bs-secondary;
-      min-width: 432px;
-      width: 34rem;
-    }
-
-    .user-menu-collapse-wrapper {
-      background-color: $c-white;
-      border: 1px solid #e8e8e8;
-      box-shadow: 0px 4px 21px rgba(0, 0, 0, 0.15);
-      border-radius: 10px;
-    }
-
-    .notification-btn {
       .MuiButtonBase-root {
-        color: $c-white;
-        background-color: #414141;
-        border-radius: 50%;
+        box-shadow: $bs-primary;
+        border-radius: 1rem;
+        background-color: $c-white;
         padding: 0.5rem;
-        width: 2.5rem;
-        height: 2.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        color: $c-yellow !important;
+        width: 3.5rem;
+        height: 3.5rem;
       }
 
-      .MuiBadge-badge {
-        background-color: #cd1212;
-        top: 0.4rem;
-        right: 0.4rem;
-        border: 2px solid #333333;
+      .mdi::before {
+        font-size: 1.5rem;
       }
     }
-
-    .status-menu-collapse-wrapper {
-      border-radius: 0.5rem;
-      background-color: $c-white;
-      box-shadow: $bs-secondary;
-      padding: 0 1rem;
-      min-width: 200px;
-    }
-
-    .user-button-wrapper {
-      @include phones-max {
-        margin: 0;
-      }
+    .cog-btn-wrapper {
       padding-right: 1rem;
-      padding-left: 1rem;
-      min-width: initial;
 
+      .MuiButtonBase-root {
+        box-shadow: $bs-primary;
+        border-radius: 1rem;
+        background-color: $c-white;
+        color: $c-info !important;
+        padding: 0.5rem;
+        width: 3.5rem;
+        height: 3.5rem;
+      }
+
+      .mdi::before {
+        font-size: 1.5rem;
+      }
+    }
+    .user-profile-btn-wrapper {
+      .MuiButtonBase-root {
+        box-shadow: $bs-primary;
+        border-radius: 100%;
+        background-color: $c-white;
+        color: $c-primary;
+        padding: 0.5rem;
+        width: 3.5rem;
+        height: 3.5rem;
+      }
       .MuiAvatar-root {
-        width: 2.3rem;
-        height: 2.3rem;
-        font-size: 14px;
-      }
-
-      .user-image {
-        min-width: 35px;
-        height: 38px;
-        width: 38px;
-        padding: 2px;
-        border-radius: 10px;
-      }
-
-      .user-name-wrapper {
-        color: $c-white;
-        @include d-inline-flex;
-        @include phones-s-max {
-          display: none !important;
-        }
-
-        .MuiButtonBase-root {
-          color: $c-white;
-          border-radius: 10px;
-          padding: 0.5rem;
-          display: flex;
-          align-items: center;
-          flex-direction: row-reverse;
-          justify-content: center;
-        }
-
-        .mdi:before {
-          color: $c-white;
-          border-radius: 50%;
-        }
-
-        .user-info-text {
-          .user-name-text {
-            text-transform: capitalize;
-            font-size: 12px;
-            color: $c-white;
-            padding-right: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            @include texts-truncate;
-            max-width: 7rem;
-            @include phones-max {
-              max-width: 80px !important;
-            }
-          }
-
-          .user-role-text {
-            text-transform: capitalize;
-            font-size: 10px;
-            color: #858585;
-            padding-right: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            @include texts-truncate;
-            max-width: 7rem;
-            @include phones-max {
-              max-width: 80px !important;
-            }
-          }
-        }
-      }
-
-      @include d-inline-flex-center;
-      position: relative;
-    }
-  }
-
-  .logo-text {
-    font-size: $fz-10px;
-    font-weight: bold;
-    font-family: $ff-semibold;
-    margin-bottom: 0.25rem;
-    color: $c-green;
-  }
-
-  .logo-text-small {
-    font-size: $fz-9px;
-    color: $c-blue-light;
-
-    .text-small {
-      font-variant: small-caps;
-    }
-  }
-
-  .logo-text,
-  .logo-text-small {
-    font-family: $ff-default !important;
-    text-transform: uppercase;
-    white-space: nowrap;
-  }
-
-  .i-text-gray {
-    margin-right: 0.5rem;
-    margin-left: 1rem;
-  }
-
-  .user-img {
-    min-width: 50px;
-    max-width: 50px;
-    min-height: 50px;
-    max-height: 50px;
-    border-radius: 100%;
-  }
-
-  .user-btn {
-    position: absolute;
-    right: 0.25rem;
-    bottom: 0.25rem;
-    transform: translate(50%, -50%);
-  }
-
-  .btns-active {
-    &.mdi,
-    .mdi {
-      color: $c-secondary;
-    }
-
-    &.icons,
-    .icons {
-      filter: invert(101%) sepia(98%) saturate(545%) hue-rotate(344deg) brightness(98.5%)
-        contrast(95%);
-    }
-
-    &img,
-    img {
-      border: 2px solid #c7c7cc;
-      border-radius: 100%;
-    }
-  }
-}
-
-.header-menu-popover-wrapper {
-  margin-top: 6px;
-  margin-bottom: 7px;
-
-  .MuiPaper-root {
-    border-radius: 0.5rem;
-    margin-top: 0.75rem;
-
-    .header-menu-wrapper {
-      @include d-flex-column;
-
-      .header-menu-btn {
-        @include d-flex;
-        margin: 0;
-        position: relative;
         background-color: $c-primary;
-        border-radius: 0;
-        min-height: 32px;
-
-        &::after {
-          content: ' ';
-          position: absolute;
-          bottom: 0;
-          z-index: 1;
-          width: 100%;
-          height: 1px;
-          min-height: 1px;
-          background-color: $c-gray-light;
-        }
       }
     }
   }

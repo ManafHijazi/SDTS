@@ -16,6 +16,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@tinymce/tinymce-react": "^3.13.0",
     "axios": "^0.25.0",
+    "hserve": "^0.1.2",
     "moment": "^2.29.1",
     "prop-types": "^15.8.1",
     "react": "^17.0.2",

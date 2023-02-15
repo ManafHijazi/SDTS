@@ -1,9 +1,11 @@
 import React, { useCallback, useState } from 'react';
 import { ButtonBase } from '@mui/material';
 import { Inputs, CheckboxesComponent } from '../../../Components';
-import { GlobalHistory } from '../../../Helpers';
+import { GlobalHistory, SetGlobalSocketReducer } from '../../../Helpers';
+import { LoginActions } from 'Store/Actions';
 
 const LoginView = () => {
+  const endPoint = localStorage.getItem('endPoint') || '';
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [isLoginLoading, setIsLoginLoading] = useState(false);
   const [isRememberMe, setIsRememberMe] = useState(false);
@@ -13,61 +15,71 @@ const LoginView = () => {
   });
 
   const handleLogin = useCallback(async () => {
-    GlobalHistory.push('/home');
-    // setIsLoginLoading(true);
-    // const response = await LoginService(state);
+    setIsLoginLoading(true);
+    const response = true;
 
-    // if (response && response.data && response.status === 200) {
-    //   const { data } = response;
+    if (response) {
+      const data = {
+        access_token: 'test_token',
+        email: 'test@test.com',
+        first_login: false,
+        first_name: 'Manaf',
+        is_deleted: false,
+        last_name: 'Hijazi',
+        profile_picture: '',
+        roles: [{ role_id: 1, role_name: 'SUPER_USER' }],
+        super_user: false,
+        user_id: 1,
+        user_name: 'mhijazi',
+      };
 
-    //   localStorage.setItem('access_token', data.access_token);
+      localStorage.setItem('access_token', data.access_token);
 
-    //   let localEndPoint = endPoint;
+      let localEndPoint = endPoint;
 
-    //   if (endPoint.includes('https')) localEndPoint = endPoint.replace('https', 'wss');
-    //   else localEndPoint = endPoint.replace('http', 'wss');
+      if (endPoint.includes('https')) localEndPoint = endPoint.replace('https', 'wss');
+      else localEndPoint = endPoint.replace('http', 'wss');
 
-    //   SetGlobalSocketReducer(
-    //     new WebSocket(`${localEndPoint}api/v1/products/ws?access_token=${data.access_token}`),
-    //   );
+      // SetGlobalSocketReducer(
+      //   new WebSocket(`${localEndPoint}api/v1/products/ws?access_token=${data.access_token}`)
+      // );
 
-    //   let userObject = { ...data, access_token: '' };
+      let userObject = { ...data, access_token: '' };
 
-    //   if (userObject && userObject.super_user) {
-    //     userObject = { ...data, roles: [{ role_name: 'SUPER_USER' }] };
-    //   }
+      if (userObject && userObject.super_user) {
+        userObject = { ...data, roles: [{ role_name: 'SUPER_USER' }] };
+      }
 
-    //   localStorage.setItem('user', JSON.stringify(userObject));
-    //   LoginActions.login(userObject);
-    //   localStorage.setItem('isLoggedIn', JSON.stringify(true));
-    //   setIsLoginLoading(false);
+      localStorage.setItem('user', JSON.stringify(userObject));
+      LoginActions.login(userObject);
+      localStorage.setItem('isLoggedIn', JSON.stringify(true));
+      setIsLoginLoading(false);
 
-    //   if (userObject && userObject.first_login) {
-    //     GlobalHistory.push('/accounts/change-password');
-    //   } else {
-    //     if (userObject && userObject.super_user) GlobalHistory.push('/home/companies-page');
-    //     else GlobalHistory.push('/home/products');
-    //   }
-    // } else {
-    //   if (response && response.data) {
-    //     showError(
-    //       (response &&
-    //         response.data &&
-    //         Array.isArray(response.data) &&
-    //         response.data.map((item, index) => (
-    //           <div key={`${index + 1}-error`}>{`- ${item}`}</div>
-    //         ))) ||
-    //         'Login Failed',
-    //     );
-    //     setIsLoginLoading(false);
-    //   }
-    // }
+      if (userObject && userObject.first_login) {
+        GlobalHistory.push('/accounts/change-password');
+      } else {
+        GlobalHistory.push('/home/dashboard-page');
+      }
+    } else {
+      if (response && response.data) {
+        showError(
+          (response &&
+            response.data &&
+            Array.isArray(response.data) &&
+            response.data.map((item, index) => (
+              <div key={`${index + 1}-error`}>{`- ${item}`}</div>
+            ))) ||
+            'Login Failed'
+        );
+        setIsLoginLoading(false);
+      }
+    }
   }, [state]);
 
   return (
     <div className='login-wrapper'>
       <div className='login-wrapper-card'>
-        <div className='card-title'>Car</div>
+        <div className='card-title'>SDTS</div>
         <div className='card-subtitle'>Please login to start using the system</div>
         <div className='login-card-body'>
           <Inputs
@@ -105,8 +117,7 @@ const LoginView = () => {
               <ButtonBase
                 id='loginShowPasswordBtnId'
                 className='btns-icon mx-2 theme-transparent'
-                onClick={() => setIsShowPassword((items) => !items)}
-              >
+                onClick={() => setIsShowPassword((items) => !items)}>
                 <span
                   className={`c-gray-primary  mdi mdi-${
                     (isShowPassword && 'eye-off') || 'eye'
@@ -124,41 +135,22 @@ const LoginView = () => {
                 setIsRememberMe((item) => !item);
               }}
             />
-            <ButtonBase
+            {/* <ButtonBase
               id='loginForgotPasswordBtnId'
               onClick={() => GlobalHistory.push('/accounts/forgot-password')}
-              className='btns btn-primary'
-            >
+              className='btns btn-primary'>
               Forgot your password?
-            </ButtonBase>
+            </ButtonBase> */}
           </div>
           <div className='login-button-wrapper'>
             <ButtonBase
               id='loginSigninBtnId'
               disabled={isLoginLoading || !state.user_id || !state.password}
-              onClick={handleLogin}
-            >
+              onClick={handleLogin}>
               {isLoginLoading ? 'Signing in ...' : 'Sign in'}
             </ButtonBase>
           </div>
         </div>
-      </div>
-      <div className='login-company-info-wrapper'>
-        <ButtonBase
-          onClick={() => {}}
-          id='loginConditionsBtnId'
-          className='btns btn-primary c-gray'
-        >
-          Terms and Conditions
-        </ButtonBase>
-        <div className='h-divider' />
-        <ButtonBase id='loginHelpBtnId' onClick={() => {}} className='btns btn-primary c-gray'>
-          Help
-        </ButtonBase>
-        <div className='h-divider' />
-        <ButtonBase id='loginRightsBtnId' onClick={() => {}} className='btns btn-primary c-gray'>
-          © 2022 Beyond Limits Inc. All rights reserved
-        </ButtonBase>
       </div>
     </div>
   );

@@ -4,7 +4,9 @@ import './DashboardPage.scss';
 const DashboardPageView = () => {
   return (
     <div className='dashboard-wrapper view-wrapper'>
-      Dashboard page
+      <div className='page-header-wrapper'>
+        <div className='page-title'>Dashboard</div>
+      </div>
     </div>
   );
 };

@@ -124,6 +124,7 @@
   border-radius: 100%;
   color: $c-gray-dark;
   padding: 0.2rem;
+
   .mdi {
     &::before {
       font-size: 24px;
@@ -135,10 +136,31 @@
     min-width: 24px;
     max-width: 24px;
 
-    .mdi {
-      &:before {
-        font-size: 18px;
-      }
+    .mdi::before {
+      font-size: 18px;
+    }
+  }
+
+  &.btns-split-left {
+    border-radius: 0;
+    border-bottom-left-radius: 0.5rem;
+    border-top-left-radius: 0.5rem;
+    border: 1px solid $c-primary;
+    border-right: 0;
+
+    .mdi::before {
+      font-size: 18px;
+    }
+  }
+  &.btns-split-right {
+    border-radius: 0;
+    border-bottom-right-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    border: 1px solid $c-primary;
+    color: $c-primary;
+
+    .mdi::before {
+      font-size: 18px;
     }
   }
 

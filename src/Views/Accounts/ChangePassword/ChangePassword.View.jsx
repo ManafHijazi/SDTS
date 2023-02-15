@@ -39,8 +39,7 @@ const ChangePasswordView = () => {
 
       localStorage.setItem('user', JSON.stringify(localUserData));
 
-      if (userData && userData.super_user) GlobalHistory.push('/home/companies-page');
-      else GlobalHistory.push('/home/products');
+      GlobalHistory.push('/home/dashboard-page');
     } else setErrors(response && response.data);
 
     setIsLoading(false);
@@ -53,8 +52,7 @@ const ChangePasswordView = () => {
           <ButtonBase
             id='changePasswordCloseBtnId'
             onClick={() => {
-              if (userData && userData.super_user) GlobalHistory.push('/home/companies-page');
-              else GlobalHistory.push('/home/products');
+              GlobalHistory.push('/home/dashboard-page');
             }}
             className='btns-icon'>
             <span className='mdi mdi-close' />

@@ -12,41 +12,27 @@
   height: 100vh;
   min-height: 35rem;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   flex-direction: column;
 
-  .login-img {
-    padding-bottom: 1.5rem;
-    img {
-      width: 19rem;
-    }
-    @media (max-width: 375px) {
-      img {
-        width: 15rem;
-      }
-    }
-  }
-
-  .login-subtitle {
-    font-size: 24px;
-    color: $c-white;
-    padding-bottom: 3rem;
-  }
+  background: black;
+  overflow: hidden;
+  background: $c-primary;
+  background: linear-gradient(rgba(39, 49, 137, 0.8), rgba(195, 55, 100, 0.8)),
+    url('https://d12eu00glpdtk2.cloudfront.net/public/images/local/al-khebra-driving-academy-qatar.jpg'); /* The least supported option. */
 
   .login-wrapper-card {
     background-color: $c-white;
-    min-width: 28%;
-    height: 24rem;
-    min-height: 24rem;
+    min-width: 25%;
+    height: 100vh;
     overflow-y: auto;
     position: relative;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     box-shadow: 0px 4px 54px rgba(0, 0, 0, 0.08);
-    border-radius: 10px;
 
     &.is-change-password {
       height: 28rem;
@@ -54,14 +40,16 @@
     }
 
     .card-title {
-      color: black;
+      padding-left: 4rem;
+      color: $c-primary;
       font-weight: bold;
-      font-family: $ff-semibold;
-      font-size: 22px;
+      font-family: $ff-bold;
+      font-size: 26px;
       padding-bottom: 0.5rem;
     }
 
     .card-subtitle {
+      padding-left: 4rem;
       color: $c-gray-darker;
       font-size: 12px;
       padding-bottom: 2rem;

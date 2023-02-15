@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { GlobalHistory } from '../../Helpers';
 import { SwitchRouteComponent } from '../../Components';
 import HomeRoutes from '../../Routes/Children/Home/Home.Routes';
-import { GlobalHistory } from '../../Helpers';
 import { HeaderComponent, SideMenuComponent } from './Sections';
 import './Home.Style.scss';
 
@@ -21,29 +21,31 @@ const HomeLayout = () => {
   );
 
   useEffect(() => {
-    const defaultRouteIndex = HomeRoutes.findIndex((item) => item.default);
+    const defaultRouteIndex = localHomeRoutes.findIndex((item) => item.default);
 
     if (defaultRouteIndex === -1)
-      HomeRoutes = HomeRoutes.map((item, index) =>
+      localHomeRoutes = localHomeRoutes.map((item, index) =>
         index === 0 ? { ...item, default: true } : item
       );
-  }, [HomeRoutes]);
+  }, [localHomeRoutes]);
 
   useEffect(() => {
-    if (isLoggedIn) GlobalHistory.push('/accounts/login');
+    if (!isLoggedIn) GlobalHistory.push('/accounts/login');
   }, [isLoggedIn]);
 
   return (
-    !isLoggedIn && (
-      <>
-        <HeaderComponent handleSideMenuOpenClose={handleSideMenuOpenClose} />
-        <div className='main-layout-wrapper'>
-          <SideMenuComponent isSideMenuOpen={isSideMenuOpen} HomeRoutes={HomeRoutes} />
-          <div className={`container-wrapper ${isSideMenuOpen ? 'is-open' : ''}`}>
-            <SwitchRouteComponent routes={HomeRoutes} />
-          </div>
+    isLoggedIn && (
+      <div className='main-layout-wrapper'>
+        <SideMenuComponent
+          HomeRoutes={localHomeRoutes}
+          isSideMenuOpen={isSideMenuOpen}
+          handleSideMenuOpenClose={handleSideMenuOpenClose}
+        />
+        <div className={`container-wrapper ${isSideMenuOpen ? 'is-open' : ''}`}>
+          <HeaderComponent />
+          <SwitchRouteComponent routes={localHomeRoutes} />
         </div>
-      </>
+      </div>
     )
   );
 };

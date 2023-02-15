@@ -1,5 +1,20 @@
 @import 'src/Assets/Styles/Helpers/Helpers.Style.scss';
 
 .dashboard-wrapper {
-  padding: 2rem;
+  background-color: white;
+  box-shadow: $bs-primary;
+
+  .page-header-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.7rem 1rem 0 1.5rem;
+
+    .page-title {
+      font-weight: bold;
+      font-size: 20px;
+      color: $c-primary;
+      font-family: $ff-semibold;
+    }
+  }
 }

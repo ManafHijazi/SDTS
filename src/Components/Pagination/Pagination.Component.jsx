@@ -57,7 +57,7 @@ export const PaginationComponent = ({
       if (Number.isNaN(+localValue) || +localValue < 1) return;
       if (onPageIndexChanged && localValue !== pageIndex + 1) onPageIndexChanged(+localValue - 1);
     },
-    [onPageIndexChanged, pageIndex, +pageSize, totalCount],
+    [onPageIndexChanged, pageIndex, +pageSize, totalCount]
   );
 
   const pageIndexValueHandler = () => {
@@ -86,8 +86,7 @@ export const PaginationComponent = ({
     <div
       className={`pagination-component-wrapper${
         (isReversedSections && ' is-reversed-section') || ''
-      }`}
-    >
+      }`}>
       <div className='pagination-section'>
         {!isRemoveTexts && (
           <span className='fz-14px fw-medium pages-text'>
@@ -98,20 +97,19 @@ export const PaginationComponent = ({
           <ButtonBase
             className='btns-icon mx-2 theme-outline'
             disabled={pageIndex === 1}
-            onClick={pageChangeHandler('leftLast')}
-          >
+            onClick={pageChangeHandler('leftLast')}>
             <span className='mdi mdi-chevron-double-left' />
           </ButtonBase>
         )}
         <ButtonBase
           className='btns-icon mx-2 theme-outline'
           disabled={pageIndex === 1}
-          onClick={pageChangeHandler('left')}
-        >
+          onClick={pageChangeHandler('left')}>
           <span className='mdi mdi-chevron-left' />
         </ButtonBase>
         {!isButtonsNavigation && !isWithoutNumbers && (
           <Inputs
+            min={1}
             idRef={`${idRef}input`}
             value={pageNumber}
             type='number'
@@ -121,7 +119,6 @@ export const PaginationComponent = ({
               const { value } = event.target;
               onPageNumberChange(value);
             }}
-            min={1}
           />
         )}
         {isButtonsNavigation &&
@@ -134,35 +131,32 @@ export const PaginationComponent = ({
               <ButtonBase
                 key={`paginationButtonsKey${idRef}${index + 1}`}
                 className={`btns-icon ${
-                  (pageNumber === index + 1 && 'theme-solid bg-secondary') || 'theme-transparent'
+                  (pageNumber === index + 1 && 'theme-solid bg-primary') || 'theme-transparent'
                 }`}
                 onClick={() =>
                   onPageNumberChange(
                     (Math.ceil(totalCount / +pageSize) <= 5 && index + 1) ||
-                      pageNumber - 2 + index + 1,
+                      pageNumber - 2 + index + 1
                   )
-                }
-              >
+                }>
                 <span>
                   {(Math.ceil(totalCount / +pageSize) <= 5 && index + 1) ||
                     pageNumber - 2 + index + 1}
                 </span>
               </ButtonBase>
-            ),
+            )
           )}
         <ButtonBase
           className='btns-icon mx-2 theme-outline'
           disabled={+pageIndex >= totalCount / +pageSize}
-          onClick={pageChangeHandler('right')}
-        >
+          onClick={pageChangeHandler('right')}>
           <span className='mdi mdi-chevron-right' />
         </ButtonBase>
         {!isWithoutLastPage && (
           <ButtonBase
             className='btns-icon mx-2 theme-outline '
             disabled={+pageIndex >= totalCount / +pageSize}
-            onClick={pageChangeHandler('rightLast')}
-          >
+            onClick={pageChangeHandler('rightLast')}>
             <span className='mdi mdi-chevron-double-right' />
           </ButtonBase>
         )}
@@ -175,13 +169,13 @@ export const PaginationComponent = ({
         )}
         {onPageSizeChanged && (
           <SelectComponent
-            idRef={`${idRef}select`}
-            data={Object.values(PaginationEnum)}
-            value={+pageSize}
-            wrapperClasses='mx-1'
-            onSelectChanged={onPageSizeChanged}
             valueInput='key'
             textInput='value'
+            value={+pageSize}
+            wrapperClasses='mx-1'
+            idRef={`${idRef}select`}
+            onSelectChanged={onPageSizeChanged}
+            data={Object.values(PaginationEnum)}
           />
         )}
 

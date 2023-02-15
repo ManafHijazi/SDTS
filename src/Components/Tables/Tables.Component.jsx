@@ -91,7 +91,7 @@ export const TablesComponent = memo(
         setCurrentOrderById(columnId);
         if (tableOptions.sortFrom === 2) sortColumnClicked(columnId, currentOrderDirection);
       },
-      [currentOrderDirection, tableOptions, sortColumnClicked],
+      [currentOrderDirection, tableOptions, sortColumnClicked]
     );
     const stableSort = (array, comparator) => {
       const stabilizedThis = array.map((el, index) => [el, index]);
@@ -108,9 +108,9 @@ export const TablesComponent = memo(
       (row) =>
         localSelectedRows.findIndex(
           (item) =>
-            getDataFromObject(row, uniqueKeyInput) === getDataFromObject(item, uniqueKeyInput),
+            getDataFromObject(row, uniqueKeyInput) === getDataFromObject(item, uniqueKeyInput)
         ),
-      [localSelectedRows, uniqueKeyInput],
+      [localSelectedRows, uniqueKeyInput]
     );
     const onSelectAllCheckboxChangedHandler = useCallback(
       (event) => {
@@ -125,7 +125,7 @@ export const TablesComponent = memo(
             isChecked,
           });
       },
-      [data, onSelectAllCheckboxChanged, selectedRows],
+      [data, onSelectAllCheckboxChanged, selectedRows]
     );
     const onSelectCheckboxChangedHandler = useCallback(
       (row, rowIndex) => (event) => {
@@ -148,7 +148,7 @@ export const TablesComponent = memo(
           });
         else if (onSelectCheckboxChanged) onSelectCheckboxChanged({ selectedRow: row, rowIndex });
       },
-      [getCurrentSelectedItemIndex, onSelectCheckboxChanged, selectedRows],
+      [getCurrentSelectedItemIndex, onSelectCheckboxChanged, selectedRows]
     );
     const bodyRowClicked = useCallback(
       (rowIndex, item) => {
@@ -166,13 +166,13 @@ export const TablesComponent = memo(
             return -1;
           });
       },
-      [focusedRow, focusedRowChanged],
+      [focusedRow, focusedRowChanged]
     );
     // const getTableActionValue = (key) =>
     //   Object.values(TableActions).find((item) => item.key === key);
     const getSortDataName = () => {
       const currentHeader = (reorderedHeader || headerData).find(
-        (item) => item.id === currentOrderById,
+        (item) => item.id === currentOrderById
       );
       if (currentHeader) return currentHeader.input;
 
@@ -191,14 +191,14 @@ export const TablesComponent = memo(
             : ((item.left || item.left === 0) && item.left) || 'initial',
         zIndex: 1,
       }),
-      [],
+      []
     );
     const onDragColumnHandler = useCallback(
       (index) => (event) => {
         event.dataTransfer.setData('text', event.currentTarget.id);
         setCurrentDraggingColumn(index);
       },
-      [],
+      []
     );
     const onDragEndColumnHandler = useCallback(() => {
       if (currentDragOverIndex !== null) setCurrentDragOverIndex(null);
@@ -208,7 +208,7 @@ export const TablesComponent = memo(
         event.preventDefault();
         if (currentDragOverIndex !== index) setCurrentDragOverIndex(index);
       },
-      [currentDragOverIndex],
+      [currentDragOverIndex]
     );
     const onDropColumnHandler = useCallback(
       (index) => (event) => {
@@ -220,7 +220,7 @@ export const TablesComponent = memo(
         if (onHeaderColumnsReorder) onHeaderColumnsReorder(localColumns);
         else setReorderedHeader(localColumns);
       },
-      [currentDraggingColumn, headerData, onHeaderColumnsReorder, reorderedHeader],
+      [currentDraggingColumn, headerData, onHeaderColumnsReorder, reorderedHeader]
     );
     const onResizeDownHandler = useCallback(
       (idRef) => (event) => {
@@ -229,7 +229,7 @@ export const TablesComponent = memo(
         currentResizingColumnRef.current = document.querySelector(idRef);
         startResizePointRef.current = currentResizingColumnRef.current.offsetWidth - event.pageX;
       },
-      [],
+      []
     );
     const onResizeMoveHandler = useCallback((event) => {
       if (!currentResizingColumnRef.current || startResizePointRef.current === null) return;
@@ -248,14 +248,14 @@ export const TablesComponent = memo(
       (row, rowIndex) => (event) => {
         if (onActionClicked) onActionClicked(row, rowIndex, event);
       },
-      [onActionClicked],
+      [onActionClicked]
     );
 
     const onTableRowClickedHandler = useCallback(
       (row) => {
         if (onTableRowClicked) onTableRowClicked(row);
       },
-      [onTableRowClicked],
+      [onTableRowClicked]
     );
 
     useEffect(() => {
@@ -273,8 +273,7 @@ export const TablesComponent = memo(
             className='table-wrapper'
             aria-labelledby='tableTitle'
             size={tableOptions.tableSize} // 'small' or 'medium'
-            aria-label='enhanced table'
-          >
+            aria-label='enhanced table'>
             <TableHead>
               <TableRow>
                 {isWithCheckAll && (
@@ -289,8 +288,7 @@ export const TablesComponent = memo(
                         })) ||
                       undefined
                     }
-                    id={`${headerRowRef}checkAllColumnId`}
-                  >
+                    id={`${headerRowRef}checkAllColumnId`}>
                     <CheckboxesComponent
                       idRef={`${headerRowRef}tableSelectAllRef`}
                       singleIndeterminate={
@@ -311,8 +309,7 @@ export const TablesComponent = memo(
                     {(isResizeCheckboxColumn || isResizable) && (
                       <ButtonBase
                         className='resize-btn'
-                        onMouseDown={onResizeDownHandler(`#${headerRowRef}checkAllColumnId`)}
-                      >
+                        onMouseDown={onResizeDownHandler(`#${headerRowRef}checkAllColumnId`)}>
                         <span />
                       </ButtonBase>
                     )}
@@ -335,15 +332,13 @@ export const TablesComponent = memo(
                       onDrag={onDragColumnHandler(index)}
                       onDrop={onDropColumnHandler(index)}
                       id={`${headerRowRef}${index + 1}`}
-                      style={(item.isSticky && getStickyStyle(item)) || undefined}
-                    >
+                      style={(item.isSticky && getStickyStyle(item)) || undefined}>
                       {!item.isSortable ? (
                         <TableSortLabel
-                          IconComponent={() => <span className='mdi mdi-menu-swap c-gray' />}
+                          IconComponent={() => <span className='mdi mdi-menu-swap c-white' />}
                           active={currentOrderById === item.id}
                           direction={currentOrderById === item.id ? currentOrderDirection : 'desc'}
-                          onClick={createSortHandler(item.id)}
-                        >
+                          onClick={createSortHandler(item.id)}>
                           {(item.headerComponent && item.headerComponent(item, index)) ||
                             item.label}
                         </TableSortLabel>
@@ -353,8 +348,7 @@ export const TablesComponent = memo(
                       {(item.isResizable || isResizable) && (
                         <ButtonBase
                           className='resize-btn'
-                          onMouseDown={onResizeDownHandler(`#${headerRowRef}${index + 1}`)}
-                        >
+                          onMouseDown={onResizeDownHandler(`#${headerRowRef}${index + 1}`)}>
                           <span />
                         </ButtonBase>
                       )}
@@ -367,8 +361,7 @@ export const TablesComponent = memo(
                     style={
                       (tableActionsOptions.isSticky && getStickyStyle(tableActionsOptions)) ||
                       undefined
-                    }
-                  >
+                    }>
                     <div className='actions-cell'>
                       <div className='actions-cell-item'>{tableActionText}</div>
                     </div>
@@ -402,17 +395,15 @@ export const TablesComponent = memo(
                           className={`${rowIndex === focusedRow ? 'table-row-overlay' : ''} ${
                             tableRowValidationArray.findIndex(
                               (item) =>
-                                item === row.product_id || item === row.id || item === row.user_id,
+                                item === row.product_id || item === row.id || item === row.user_id
                             ) !== -1
                               ? 'has-validation'
                               : ''
-                          } ${disabledRow && disabledRow(row) ? 'is-disabled' : ''}`}
-                        >
+                          } ${disabledRow && disabledRow(row) ? 'is-disabled' : ''}`}>
                           {(isWithCheck || getIsSelectedRow || selectedRows) && (
                             <TableCell
                               padding='checkbox'
-                              style={(row.isSticky && getStickyStyle(row)) || undefined}
-                            >
+                              style={(row.isSticky && getStickyStyle(row)) || undefined}>
                               <CheckboxesComponent
                                 idRef={`tableSelectRef${rowIndex + 1}`}
                                 singleChecked={
@@ -427,7 +418,7 @@ export const TablesComponent = memo(
                                 }
                                 onSelectedCheckboxChanged={onSelectCheckboxChangedHandler(
                                   row,
-                                  rowIndex,
+                                  rowIndex
                                 )}
                               />
                               <div />
@@ -440,12 +431,11 @@ export const TablesComponent = memo(
                                 <TableCell
                                   key={`bodyColumn${columnIndex * (pageIndex + 1) + rowIndex}`}
                                   className={column.cellClasses || ''}
-                                  style={(column.isSticky && getStickyStyle(column)) || undefined}
-                                >
+                                  style={(column.isSticky && getStickyStyle(column)) || undefined}>
                                   {(column.isDate &&
                                     ((getDataFromObject(row, column.input) &&
                                       moment(getDataFromObject(row, column.input)).format(
-                                        column.dateFormat || tableOptions.dateFormat || dateFormat,
+                                        column.dateFormat || tableOptions.dateFormat || dateFormat
                                       )) ||
                                       '')) ||
                                     (column.component &&
@@ -463,8 +453,7 @@ export const TablesComponent = memo(
                                 (tableActionsOptions.isSticky &&
                                   getStickyStyle(tableActionsOptions)) ||
                                 undefined
-                              }
-                            >
+                              }>
                               {(tableActionsOptions.component &&
                                 tableActionsOptions.component(row, rowIndex)) ||
                                 (tableActions &&
@@ -476,14 +465,13 @@ export const TablesComponent = memo(
                                           tableActionsOptions.getDisabledAction(
                                             row,
                                             rowIndex,
-                                            item,
+                                            item
                                           )) ||
                                         isDisabledActions
                                       }
                                       onClick={onActionClickedHandler(item, row, rowIndex)}
                                       key={`${item.key}-${rowIndex + 1}`}
-                                      className={`btns mx-1 theme-solid ${item.bgColor || ''}`}
-                                    >
+                                      className={`btns mx-1 theme-solid ${item.bgColor || ''}`}>
                                       <span className={item.icon} />
                                       {item.value}
                                     </ButtonBase>
@@ -494,7 +482,7 @@ export const TablesComponent = memo(
                         </TableRow>
                       </React.Fragment>
                     );
-                  },
+                  }
                 )}
               </TableBody>
             )}
@@ -512,28 +500,28 @@ export const TablesComponent = memo(
           </Table>
         </TableContainer>
         <LoaderComponent
-          isLoading={isLoading}
           isSkeleton
+          isLoading={isLoading}
           wrapperClasses='table-loader-wrapper'
           skeletonItems={[{ varient: 'rectangular', className: 'table-loader-row' }]}
           numberOfRepeat={(totalItems / pageIndex > pageSize && pageSize) || 6}
         />
         {!isOriginalPagination && (onPageIndexChanged || onPageSizeChanged) && (
           <PaginationComponent
-            idRef={paginationIdRef}
-            totalCount={totalItems}
-            pageIndex={pageIndex}
-            pageSize={pageSize}
-            isButtonsNavigation
-            isReversedSections
             isRemoveTexts
+            pageSize={pageSize}
+            isReversedSections
+            isButtonsNavigation
+            totalCount={totalItems}
+            idRef={paginationIdRef}
+            pageIndex={pageIndex + 1}
             onPageIndexChanged={onPageIndexChanged}
             onPageSizeChanged={onPageSizeChanged}
           />
         )}
       </div>
     );
-  },
+  }
 );
 
 TablesComponent.displayName = 'TablesComponent';
