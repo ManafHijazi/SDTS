@@ -6,8 +6,8 @@
   overflow: hidden;
   position: sticky;
   top: 0;
-  width: 5%;
-  min-width: 5rem;
+  width: 4%;
+  min-width: 4rem;
   z-index: 9;
   background-image: linear-gradient(to bottom, #8b0d35, #9b1c42, #aa2a50, #ba365e, #ca426d);
   transition: all 0.18s ease-in-out;
@@ -44,7 +44,7 @@
       font-size: 20px;
       font-family: $ff-semibold;
       color: $c-primary-lighter;
-      padding: 1rem 1.5rem;
+      padding: 1rem;
 
       .MuiButtonBase-root {
         border-radius: 0.5rem;
@@ -80,13 +80,13 @@
 
         .MuiButtonBase-root {
           width: 100%;
-          padding: 1rem 0.95rem;
+          padding: 0.7rem 0.8rem;
           display: flex;
           align-items: center;
           justify-content: flex-start;
           font-weight: lighter;
           border-radius: 0.5rem;
-          margin: 0 1rem;
+          margin: 0 0.75rem;
           margin-bottom: 0.5rem;
           font-size: 14px;
           transition: background-color 0.18s ease-in-out, width 0.18s ease-in-out;
