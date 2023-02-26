@@ -3,6 +3,7 @@
 @import './Utilities/Scrollbar.Style.scss';
 @import './Utilities/Switches.Style.scss';
 @import './Utilities/Fonts.Style.scss';
+
 // ======================================================== End Custom Themes
 //========================================================= Start Main Tags Override
 *,
@@ -30,6 +31,7 @@ body {
   }
 
   &.is-dark-mode {
+
     .home-views-wrapper,
     .MuiPaper-root,
     .side-extended-wrapper,
@@ -55,6 +57,10 @@ hr {
 
 .react-toast-notifications__container {
   z-index: 1350 !important;
+}
+
+.MuiBackdrop-root {
+  backdrop-filter: saturate(180%) blur(5px);
 }
 
 @include rtl-in {

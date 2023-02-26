@@ -1,5 +1,5 @@
 import React, {useState, useCallback, useEffect} from 'react';
-import {TablesComponent} from 'Components';
+import {DialogComponent, Inputs, TablesComponent} from 'Components';
 import {ButtonBase, Tooltip} from '@mui/material';
 import {showError} from 'Helpers';
 import './StudentsPage.scss';
@@ -7,6 +7,7 @@ import './StudentsPage.scss';
 const StudentsPageView = () => {
   const [activeButton, setActiveButton] = useState('list');
   const [isLoading, setisLoading] = useState(false);
+  const [isCreateDialogOpen, setiIsCreateDialogOpen] = useState(false);
   const [students, setStudents] = useState({
     total_count: 0,
     results: [
@@ -22,6 +23,9 @@ const StudentsPageView = () => {
     sort_order: '',
     page: 1,
     page_limit: 5,
+  });
+  const [state, setState] = useState({
+    name: '',
   });
 
   const onPageIndexChanged = (newIndex) => {
@@ -48,6 +52,13 @@ const StudentsPageView = () => {
     setisLoading(false);
   }, [filter]);
 
+  const isOpenCreateChanged = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    setiIsCreateDialogOpen(false)
+  }
+
   useEffect(() => {
     getAllStudents();
   }, [getAllStudents]);
@@ -70,7 +81,7 @@ const StudentsPageView = () => {
             <span className='mdi mdi-id-card' />
           </ButtonBase>
 
-          <ButtonBase className='btns theme-primary c-white bg-secondary pr-3' onClick={() => { }}>
+          <ButtonBase className='btns theme-primary c-white bg-secondary pr-3' onClick={() => setiIsCreateDialogOpen(true)}>
             <span className='mdi mdi-plus pr-1' />
             Register New Student
           </ButtonBase>
@@ -142,6 +153,52 @@ const StudentsPageView = () => {
             ))}
         </div>
       )}
+
+      <DialogComponent
+        maxWidth="md"
+        saveIdRef="studentSaveDialogBtnId"
+        cancelIdRef="studentCancelDialogBtnId"
+        wrapperClasses="student-dilaog-wrapper"
+        dialogTitle='Register New Student'
+        dialogContent={
+          <div className="dialog-content">
+            <div className="dialog-filed">
+              <Inputs
+                autoFocus
+                minLength={3}
+                maxLength={51}
+                value={state.name}
+                error={state.name > 50}
+                idRef="studentNameInputId"
+                inputPlaceholder="Fullname"
+                helperText="The name can't exceed 50 characters"
+                onInputChanged={(event) => {
+                  const {value} = event.target;
+                  setState(items => ({...items, name: value}));
+                }}
+              />
+            </div>
+            <div className="dialog-filed">
+              <Inputs
+                value={state.name}
+                idRef="studentEmailInputId"
+                inputPlaceholder="Email"
+                onInputChanged={(event) => {
+                  const {value} = event.target;
+                  setState(items => ({...items, name: value}));
+                }}
+              />
+            </div>
+          </div>
+        }
+        saveText='Register'
+        isOpen={isCreateDialogOpen}
+        cancelClasses="btns theme-outline"
+        onSaveClicked={isOpenCreateChanged}
+        saveClasses="btns theme-solid bg-primary"
+        onCloseClicked={() => setiIsCreateDialogOpen(false)}
+        onCancelClicked={() => setiIsCreateDialogOpen(false)}
+      />
     </div>
   );
 };

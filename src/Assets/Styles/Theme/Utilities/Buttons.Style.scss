@@ -10,9 +10,11 @@
   color: $c-secondary;
   white-space: nowrap;
   font-family: $ff-default !important;
+
   .mdi {
     line-height: 14px;
   }
+
   &.theme-solid {
     background-color: $c-secondary;
     color: $c-white;
@@ -43,8 +45,8 @@
   }
 
   &.theme-outline {
-    color: $c-gray-primary;
-    border: 2px solid $c-secondary;
+    color: $c-primary;
+    border: 2px solid $c-primary;
     font-weight: bold;
     font-family: $ff-semibold;
   }
@@ -58,6 +60,7 @@
     padding: 0.6rem;
     margin-left: 0;
     margin-right: 0;
+
     &:not([disabled]) {
       &:hover {
         background-color: $c-gray-lighter;
@@ -75,6 +78,7 @@
     padding: 0.5rem;
     margin-left: 0;
     margin-right: 0;
+
     &:not([disabled]) {
       &:hover {
         background-color: $c-gray-lighter;
@@ -130,6 +134,7 @@
       font-size: 24px;
     }
   }
+
   &.btns-small {
     width: 24px;
     height: 24px;
@@ -152,6 +157,7 @@
       font-size: 18px;
     }
   }
+
   &.btns-split-right {
     border-radius: 0;
     border-bottom-right-radius: 0.5rem;
@@ -217,8 +223,10 @@
 
   &.theme-action {
     color: $c-white;
+
     &:not(:focus):not(:active):not(.active) {
       background-color: $c-black-light !important;
+
       &:hover {
         background-color: $c-primary !important;
       }
@@ -278,17 +286,21 @@
     -ms-border-radius: 7px;
     -o-border-radius: 7px;
   }
+
   .mdi {
     color: $c-white;
   }
+
   .css-10d1a0h-MuiButtonBase-root.Mui-disabled {
     cursor: not-allowed;
     color: #878787;
+
     .mdi {
       color: #878787;
     }
   }
 }
+
 .bbt-gray {
   .MuiButtonBase-root {
     color: $c-white;
@@ -304,10 +316,12 @@
     -ms-border-radius: 7px;
     -o-border-radius: 7px;
   }
+
   .mdi {
     color: #878787;
   }
 }
+
 .bbt-gray-lite {
   .MuiButtonBase-root {
     min-width: 5rem;
@@ -323,10 +337,12 @@
     -ms-border-radius: 7px;
     -o-border-radius: 7px;
   }
+
   .mdi {
     color: #878787;
   }
 }
+
 .bbt-primary {
   .MuiButtonBase-root {
     color: $c-white;
@@ -343,12 +359,15 @@
     -ms-border-radius: 7px;
     -o-border-radius: 7px;
   }
+
   .mdi {
     color: $c-white;
   }
+
   .css-10d1a0h-MuiButtonBase-root.Mui-disabled {
     cursor: not-allowed;
     color: #878787;
+
     .mdi {
       color: #878787;
     }

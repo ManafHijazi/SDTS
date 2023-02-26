@@ -8,7 +8,7 @@ import {
   CircularProgress,
 } from '@mui/material';
 import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 import './Dialog.Style.scss';
 
 export const DialogComponent = ({
@@ -74,7 +74,7 @@ export const DialogComponent = ({
   saveIdRef,
   cancelIdRef,
 }) => {
-  const { t } = useTranslation([parentTranslationPath, 'Shared']);
+  const {t} = useTranslation([parentTranslationPath, 'Shared']);
 
   return (
     <Dialog
@@ -94,9 +94,8 @@ export const DialogComponent = ({
     >
       <form className='w-100' noValidate id={dialogFormId} onSubmit={onSubmit}>
         <DialogTitle
-          className={`dialog-title-wrapper ${titleClasses} ${
-            (dialogTitle && ' with-custom-title') || ''
-          }`}
+          className={`dialog-title-wrapper ${titleClasses} ${(dialogTitle && ' with-custom-title') || ''
+            }`}
         >
           {(!dialogTitle && (isConfirm || titleText) && (
             <span className={`dialog-title-text ${titleTextClasses}`}>
@@ -117,7 +116,7 @@ export const DialogComponent = ({
         </DialogTitle>
         <div className='content-and-footer-wrapper'>
           <DialogContent
-            style={{ minHeight }}
+            style={{minHeight}}
             className={`dialog-content-wrapper ${contentClasses}`}
           >
             {dialogContent || undefined}
@@ -157,9 +156,8 @@ export const DialogComponent = ({
                         <div className={`save-wrapper ${saveWrapperClasses}`}>
                           <ButtonBase
                             id={saveIdRef}
-                            className={`save-btn-wrapper ${saveClasses}${
-                              (isConfirm && !isWithoutConfirmClasses && ' bg-danger') || ''
-                            }${(isEdit && ' bg-secondary') || ''}`}
+                            className={`save-btn-wrapper ${saveClasses}${(isConfirm && !isWithoutConfirmClasses && ' bg-danger') || ''
+                              }${(isEdit && ' bg-secondary') || ''}`}
                             type={saveType}
                             onClick={onSaveClicked}
                             disabled={saveIsDisabled || isSaving}
@@ -170,9 +168,8 @@ export const DialogComponent = ({
                                 saveText === 'save' &&
                                 t(`${translationPathShared}confirm`)) ||
                                 t(
-                                  `${
-                                    (saveText === 'save' && translationPathShared) ||
-                                    translationPath
+                                  `${(saveText === 'save' && translationPathShared) ||
+                                  translationPath
                                   }${saveText}`,
                                 )}
                             </span>
@@ -219,9 +216,8 @@ export const DialogComponent = ({
                           >
                             <span>
                               {t(
-                                `${
-                                  (cancelText === 'cancel' && translationPathShared) ||
-                                  translationPath
+                                `${(cancelText === 'cancel' && translationPathShared) ||
+                                translationPath
                                 }${cancelText}`,
                               )}
                             </span>
@@ -232,9 +228,8 @@ export const DialogComponent = ({
                         <div className={`save-wrapper ${saveWrapperClasses}`}>
                           <ButtonBase
                             id={saveIdRef}
-                            className={`save-btn-wrapper ${saveClasses}${
-                              (isConfirm && !isWithoutConfirmClasses && ' bg-danger') || ''
-                            }${(isEdit && ' bg-secondary') || ''}`}
+                            className={`save-btn-wrapper ${saveClasses}${(isConfirm && !isWithoutConfirmClasses && ' bg-danger') || ''
+                              }${(isEdit && ' bg-secondary') || ''}`}
                             type={saveType}
                             onClick={onSaveClicked}
                             disabled={saveIsDisabled || isSaving}
@@ -245,9 +240,8 @@ export const DialogComponent = ({
                                 saveText === 'save' &&
                                 t(`${translationPathShared}confirm`)) ||
                                 t(
-                                  `${
-                                    (saveText === 'save' && translationPathShared) ||
-                                    translationPath
+                                  `${(saveText === 'save' && translationPathShared) ||
+                                  translationPath
                                   }${saveText}`,
                                 )}
                             </span>
@@ -347,7 +341,7 @@ DialogComponent.defaultProps = {
   titleTextClasses: '',
   titleText: undefined,
   saveText: 'save',
-  cancelText: 'cancel',
+  cancelText: 'Cancel',
   closeIsDisabled: false,
   isSaveLoading: false,
   previousIsDisabled: false,

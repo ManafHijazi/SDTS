@@ -15,15 +15,13 @@
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
-
-  background: black;
   overflow: hidden;
-  background: $c-primary;
   background: $bg-gradient-primary,
     url('https://d12eu00glpdtk2.cloudfront.net/public/images/local/al-khebra-driving-academy-qatar.jpg');
 
   .login-wrapper-card {
-    background-color: $c-white;
+    background-color: rgba(255, 255, 255, 0.641);
+    backdrop-filter: saturate(180%) blur(1rem);
     min-width: 25%;
     height: 100vh;
     overflow-y: auto;
@@ -32,7 +30,6 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    box-shadow: 0px 4px 54px rgba(0, 0, 0, 0.08);
 
     &.is-change-password {
       height: 28rem;
