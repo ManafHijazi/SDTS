@@ -7,14 +7,14 @@
   padding: 0.219rem 0.5rem;
   text-transform: initial;
   font-size: $fz-13px;
-  color: $c-primary;
+  color: $c-secondary;
   white-space: nowrap;
   font-family: $ff-default !important;
   .mdi {
     line-height: 14px;
   }
   &.theme-solid {
-    background-color: $c-primary;
+    background-color: $c-secondary;
     color: $c-white;
 
     &.bg-cancel {
@@ -44,7 +44,7 @@
 
   &.theme-outline {
     color: $c-gray-primary;
-    border: 2px solid $c-primary;
+    border: 2px solid $c-secondary;
     font-weight: bold;
     font-family: $ff-semibold;
   }
@@ -145,7 +145,7 @@
     border-radius: 0;
     border-bottom-left-radius: 0.5rem;
     border-top-left-radius: 0.5rem;
-    border: 1px solid $c-primary;
+    border: 1px solid $c-secondary;
     border-right: 0;
 
     .mdi::before {
@@ -156,8 +156,8 @@
     border-radius: 0;
     border-bottom-right-radius: 0.5rem;
     border-top-right-radius: 0.5rem;
-    border: 1px solid $c-primary;
-    color: $c-primary;
+    border: 1px solid $c-secondary;
+    color: $c-secondary;
 
     .mdi::before {
       font-size: 18px;
@@ -226,7 +226,7 @@
   }
 
   &.theme-solid {
-    background-color: $c-primary;
+    background-color: $c-secondary;
     color: $c-white;
   }
 
@@ -259,7 +259,7 @@
   height: 1rem;
 
   .MuiButton-label {
-    color: $c-primary;
+    color: $c-secondary;
   }
 }
 

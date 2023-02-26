@@ -1,9 +1,11 @@
-$c-primary-dark: #51071e;
-$c-primary: #8b0d35;
-$c-primary-light: #db3d6f;
-$c-primary-lighter: #fff5f5;
-$c-primary-lightest: #fff5f5c6;
-$c-secondary: #3cd1f3;
+$c-primary-dark: #1f2450;
+$c-primary-opacity: #5e68bfb0;
+$c-primary: #5e67bf;
+$c-primary-light: #dce0ff;
+$c-primary-lighter: white;
+$c-primary-lightest: white;
+$c-secondary: rgb(226, 31, 93);
+$c-secondary-opacity: rgba(226, 31, 93, 0.554);
 $c-secondary-light: #e8f0ff;
 $c-purple: #68529f;
 $c-success: #31c7aa;
@@ -44,13 +46,11 @@ $c-gray-lightest: #fafafa;
 $c-lavender: #e1e2fe;
 $c-error: #f44336;
 $bg-progress-gradient: linear-gradient(90deg, $c-warning 0%, $c-primary 45%, $c-success 100%);
-$bg-progress-gradient-reversed: linear-gradient(
-  -90deg,
-  $c-warning 0%,
-  $c-primary 45%,
-  $c-success 100%
-);
-$bg-gradient-primary: linear-gradient(191deg, $c-primary 91%, $c-primary-dark 10%);
+$bg-progress-gradient-reversed: linear-gradient(-90deg,
+                $c-warning 0%,
+                $c-primary 45%,
+                $c-success 100%);
+$bg-gradient-primary: linear-gradient($c-primary-opacity, $c-secondary-opacity);
 $bg-gradient-primary-right: linear-gradient(to right, $c-primary 0%, $c-primary-dark 100%);
 $bg-gradient-primary-left: linear-gradient(to left, $c-primary 0%, $c-primary-dark 100%);
 $bg-gradient-primary-top: linear-gradient(to top, $c-primary 0%, $c-primary-dark 100%);

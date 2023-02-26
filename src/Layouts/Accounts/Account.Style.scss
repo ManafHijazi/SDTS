@@ -19,8 +19,8 @@
   background: black;
   overflow: hidden;
   background: $c-primary;
-  background: linear-gradient(rgba(39, 49, 137, 0.8), rgba(195, 55, 100, 0.8)),
-    url('https://d12eu00glpdtk2.cloudfront.net/public/images/local/al-khebra-driving-academy-qatar.jpg'); /* The least supported option. */
+  background: $bg-gradient-primary,
+    url('https://d12eu00glpdtk2.cloudfront.net/public/images/local/al-khebra-driving-academy-qatar.jpg');
 
   .login-wrapper-card {
     background-color: $c-white;

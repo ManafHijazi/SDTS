@@ -1,6 +1,7 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import { TablesComponent } from 'Components';
-import { ButtonBase, Tooltip } from '@mui/material';
+import React, {useState, useCallback, useEffect} from 'react';
+import {TablesComponent} from 'Components';
+import {ButtonBase, Tooltip} from '@mui/material';
+import {showError} from 'Helpers';
 import './StudentsPage.scss';
 
 const StudentsPageView = () => {
@@ -9,11 +10,11 @@ const StudentsPageView = () => {
   const [students, setStudents] = useState({
     total_count: 0,
     results: [
-      { id: 1, user_name: 'testuser1', full_name: 'Test User 1', created_date: new Date() },
-      { id: 2, user_name: 'testuser2', full_name: 'Test User 2', created_date: new Date() },
-      { id: 3, user_name: 'testuser3', full_name: 'Test User 3', created_date: new Date() },
-      { id: 4, user_name: 'testuser4', full_name: 'Test User 4', created_date: new Date() },
-      { id: 5, user_name: 'testuser5', full_name: 'Test User 5', created_date: new Date() },
+      {id: 1, user_name: 'testuser1', full_name: 'Test User 1', created_date: new Date()},
+      {id: 2, user_name: 'testuser2', full_name: 'Test User 2', created_date: new Date()},
+      {id: 3, user_name: 'testuser3', full_name: 'Test User 3', created_date: new Date()},
+      {id: 4, user_name: 'testuser4', full_name: 'Test User 4', created_date: new Date()},
+      {id: 5, user_name: 'testuser5', full_name: 'Test User 5', created_date: new Date()},
     ],
   });
   const [filter, setFilter] = useState({
@@ -24,7 +25,7 @@ const StudentsPageView = () => {
   });
 
   const onPageIndexChanged = (newIndex) => {
-    setFilter((items) => ({ ...items, page: newIndex }));
+    setFilter((items) => ({...items, page: newIndex}));
   };
 
   const getAllStudents = useCallback(async () => {
@@ -33,14 +34,14 @@ const StudentsPageView = () => {
     const response = {};
 
     if (response && response.data && response.status === 200) {
-      const { data } = response;
+      const {data} = response;
 
       setStudents(data);
     } else {
       showError(
         (response && response.data && response.data.error) ||
-          (response && response.data && response.data[0]) ||
-          'Failed To Get Students'
+        (response && response.data && response.data[0]) ||
+        'Failed To Get Students'
       );
     }
 
@@ -57,21 +58,19 @@ const StudentsPageView = () => {
         <div className='page-title'>Students</div>
         <div className='page-actions'>
           <ButtonBase
-            className={`btns-icon btns-split-left c-primary ${
-              activeButton === 'list' ? 'bg-primary c-white' : ''
-            }`}
+            className={`btns-icon btns-split-left c-secondary ${activeButton === 'list' ? 'bg-secondary c-white' : ''
+              }`}
             onClick={() => setActiveButton('list')}>
             <span className='mdi mdi-format-list-bulleted' />
           </ButtonBase>
           <ButtonBase
-            className={`btns-icon btns-split-right c-primary mr-3 ${
-              activeButton === 'card' ? 'bg-primary c-white' : ''
-            }`}
+            className={`btns-icon btns-split-right c-secondary mr-3 ${activeButton === 'card' ? 'bg-secondary c-white' : ''
+              }`}
             onClick={() => setActiveButton('card')}>
             <span className='mdi mdi-id-card' />
           </ButtonBase>
 
-          <ButtonBase className='btns theme-primary c-white bg-primary pr-3' onClick={() => {}}>
+          <ButtonBase className='btns theme-primary c-white bg-secondary pr-3' onClick={() => { }}>
             <span className='mdi mdi-plus pr-1' />
             Register New Student
           </ButtonBase>

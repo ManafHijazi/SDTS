@@ -131,7 +131,7 @@ export const PaginationComponent = ({
               <ButtonBase
                 key={`paginationButtonsKey${idRef}${index + 1}`}
                 className={`btns-icon ${
-                  (pageNumber === index + 1 && 'theme-solid bg-primary') || 'theme-transparent'
+                  (pageNumber === index + 1 && 'theme-solid bg-secondary') || 'theme-transparent'
                 }`}
                 onClick={() =>
                   onPageNumberChange(

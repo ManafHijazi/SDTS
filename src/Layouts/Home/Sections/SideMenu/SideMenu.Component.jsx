@@ -1,13 +1,13 @@
 import React from 'react';
-import { storageService } from 'utils';
-import { LoginActions } from 'Store/Actions';
-import { useLocation } from 'react-router-dom';
-import { ButtonBase, Tooltip } from '@mui/material';
-import { GlobalHistory } from '../../../../Helpers/Middleware.Helper';
-import { removeAllPendingRequestsRecordHttp, showError, showSuccess } from 'Helpers';
+import {storageService} from 'utils';
+import {LoginActions} from 'Store/Actions';
+import {useLocation} from 'react-router-dom';
+import {ButtonBase, Tooltip} from '@mui/material';
+import {GlobalHistory} from '../../../../Helpers/Middleware.Helper';
+import {removeAllPendingRequestsRecordHttp, showError, showSuccess} from 'Helpers';
 import './SideMenu.Style.scss';
 
-export const SideMenuComponent = ({ isSideMenuOpen, HomeRoutes, handleSideMenuOpenClose }) => {
+export const SideMenuComponent = ({isSideMenuOpen, HomeRoutes, handleSideMenuOpenClose}) => {
   const location = useLocation();
   const isRouteActive = (path) => location.pathname.includes(path);
 
@@ -23,7 +23,7 @@ export const SideMenuComponent = ({ isSideMenuOpen, HomeRoutes, handleSideMenuOp
     const response = {};
 
     if (response && response.data && response.status === 200) {
-      const { data } = response;
+      const {data} = response;
 
       showSuccess(data?.msg || 'Logged out Successfully');
 
@@ -53,11 +53,19 @@ export const SideMenuComponent = ({ isSideMenuOpen, HomeRoutes, handleSideMenuOp
   return (
     <div className={`side-menu-wrapper ${isSideMenuOpen ? 'is-open' : ''}`}>
       <div className='side-menu-content'>
-        <div className='side-menu-title-wrapper'>
-          <ButtonBase onClick={handleSideMenuOpenClose}>
-            <span className='mdi mdi-menu' />
-          </ButtonBase>
+        <div className='side-menu-title-info-wrapper'>
+          <div id='nav-icon' className={`${isSideMenuOpen ? 'open' : ''}`} onClick={handleSideMenuOpenClose}>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
           <div className='side-menu-title'>SDTS</div>
+        </div>
+
+        <div className='side-menu-title-wrapper'>
         </div>
 
         <div className={`side-menu-items ${!isSideMenuOpen ? 'is-closed' : ''}`}>
@@ -88,6 +96,6 @@ export const SideMenuComponent = ({ isSideMenuOpen, HomeRoutes, handleSideMenuOp
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
