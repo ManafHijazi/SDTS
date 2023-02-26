@@ -38,11 +38,11 @@ const VehiclesPageView = () => {
 
       setVehicles(data);
     } else {
-      showError(
-        (response && response.data && response.data.error) ||
-        (response && response.data && response.data[0]) ||
-        'Failed To Get Vehicle'
-      );
+      // showError(
+      //   (response && response.data && response.data.error) ||
+      //   (response && response.data && response.data[0]) ||
+      //   'Failed To Get Vehicle'
+      // );
     }
 
     setisLoading(false);

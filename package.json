@@ -16,10 +16,12 @@
     "@testing-library/user-event": "^13.5.0",
     "@tinymce/tinymce-react": "^3.13.0",
     "axios": "^0.25.0",
+    "chart.js": "^4.2.1",
     "hserve": "^0.1.2",
     "moment": "^2.29.1",
     "prop-types": "^15.8.1",
     "react": "^17.0.2",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "^17.0.2",
     "react-i18next": "^11.15.4",
     "react-redux": "^7.2.6",
@@ -118,6 +120,7 @@
     "eslint": "^8.29.0",
     "eslint-plugin-autofix": "^1.1.0",
     "eslint-plugin-react": "^7.31.11",
+    "faker": "^5.5.3",
     "prettier": "2.8.1",
     "sass": "^1.54.9"
   }

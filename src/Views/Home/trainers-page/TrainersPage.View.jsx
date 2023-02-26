@@ -38,11 +38,11 @@ const TrainersPageView = () => {
 
       setStudents(data);
     } else {
-      showError(
-        (response && response.data && response.data.error) ||
-        (response && response.data && response.data[0]) ||
-        'Failed To Get Trainer'
-      );
+      // showError(
+      //   (response && response.data && response.data.error) ||
+      //   (response && response.data && response.data[0]) ||
+      //   'Failed To Get Trainer'
+      // );
     }
 
     setisLoading(false);

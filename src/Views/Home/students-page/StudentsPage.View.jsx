@@ -42,11 +42,11 @@ const StudentsPageView = () => {
 
       setStudents(data);
     } else {
-      showError(
-        (response && response.data && response.data.error) ||
-        (response && response.data && response.data[0]) ||
-        'Failed To Get Students'
-      );
+      // showError(
+      //   (response && response.data && response.data.error) ||
+      //   (response && response.data && response.data[0]) ||
+      //   'Failed To Get Students'
+      // );
     }
 
     setisLoading(false);

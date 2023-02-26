@@ -8,15 +8,17 @@
   justify-content: space-between;
 
   .header-title {
-    font-size: 26px;
+    font-size: 28px;
     padding-bottom: 0.5rem;
     font-weight: bold;
     font-family: $ff-extrabold;
     color: $c-primary-dark;
   }
+
   .header-subtitle {
     font-size: 16px;
     color: $c-gray-dark;
+    padding-left: 0.3rem;
   }
 
   .header-btns {
@@ -40,6 +42,7 @@
         font-size: 1.5rem;
       }
     }
+
     .cog-btn-wrapper {
       padding-right: 1rem;
 
@@ -57,6 +60,7 @@
         font-size: 1.5rem;
       }
     }
+
     .user-profile-btn-wrapper {
       .MuiButtonBase-root {
         box-shadow: $bs-primary;
@@ -67,6 +71,7 @@
         width: 3.5rem;
         height: 3.5rem;
       }
+
       .MuiAvatar-root {
         background-color: $c-primary;
       }

@@ -1,20 +1,14 @@
 @import 'src/Assets/Styles/Helpers/Helpers.Style.scss';
 
 .dashboard-wrapper {
-  background-color: white;
-  box-shadow: $bs-primary;
+  padding-right: 2rem;
 
-  .page-header-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.7rem 1rem 0 1.5rem;
-
-    .page-title {
-      font-weight: bold;
-      font-size: 20px;
-      color: $c-primary;
-      font-family: $ff-semibold;
-    }
+  .chart-item {
+    width: 33.3333%;
+    background-color: white;
+    box-shadow: $bs-primary;
+    padding: 1rem;
+    transition: all 0.18s ease-in-out;
+    border-radius: 1.5rem;
   }
 }
