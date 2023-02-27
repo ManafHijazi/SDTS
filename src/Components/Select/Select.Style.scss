@@ -19,7 +19,7 @@
   &.MuiFormControl-root {
     min-height: 38px;
     max-height: 38px;
-    background-color: $c-white;
+    background-color: $c-gray;
     min-width: 100px;
     width: 100%;
 
@@ -27,39 +27,47 @@
       width: 100%;
       @include d-flex-v-center;
       min-height: 46px;
+
       .MuiCircularProgress-root {
         min-width: 20px;
         margin: 0 0.5rem;
       }
+
       .dropdown-icon-wrapper {
         @include d-inline-flex-center;
         color: $c-gray;
         position: absolute;
         right: 0;
         pointer-events: none;
+        font-size: $fz-22px;
+        margin: 0 0.45rem;
+
         @include rtl {
           left: 0;
           right: initial;
         }
+
         &.is-with-end-adornment {
           right: 1.5rem;
+
           @include rtl {
             left: 1.5rem;
             right: initial;
           }
         }
-        font-size: $fz-22px;
-        margin: 0 0.45rem;
+
         &::before {
           font-size: $fz-19px;
         }
       }
+
       .MuiSelect-select {
+        @include texts-truncate;
         min-height: 38px;
         max-height: 38px;
         font-size: $fz-14px;
-        @include texts-truncate;
         padding-top: 0;
+        color: $c-primary;
         padding-bottom: 0;
         padding-right: 2rem !important;
         padding-left: 0.5rem !important;
@@ -68,13 +76,15 @@
           padding-left: 2rem !important;
           padding-right: 0.5rem !important;
         }
+
         &[aria-expanded='true'] {
-          + input + .mdi {
+          +input+.mdi {
             &::before {
               transform: scale(-1);
             }
           }
         }
+
         &.Mui-disabled {
           cursor: not-allowed;
           pointer-events: initial;
@@ -88,19 +98,21 @@
           left: 0;
         }
       }
-
-      color: $c-primary;
     }
+
     &.theme-action-buttons {
       border-radius: 2rem;
+
       &.c-white {
         .selects {
+
           .MuiSelect-select,
           .dropdown-icon-wrapper {
             color: $c-white;
           }
         }
       }
+
       &.bg-secondary {
         .selects {
           .MuiSelect-select {
@@ -110,9 +122,11 @@
           }
         }
       }
+
       .select-body-wrapper {
         width: 100%;
       }
+
       .MuiInput-underline:before {
         display: none;
       }
@@ -126,6 +140,7 @@
           &:focus {
             background-color: $c-white;
           }
+
           border-radius: 2rem;
         }
 
@@ -134,12 +149,13 @@
         }
       }
     }
+
     &.theme-default {
       width: 100%;
       min-height: 38px;
       max-height: 38px;
       border-radius: 0.35rem;
-      background-color: $c-white;
+      background-color: $c-gray-light;
 
       &.c-white {
         .selects {
@@ -148,6 +164,7 @@
           }
         }
       }
+
       &.bg-secondary {
         .selects {
           .MuiSelect-select {
@@ -157,9 +174,11 @@
           }
         }
       }
+
       .select-body-wrapper {
         width: 100%;
       }
+
       .MuiInput-underline:before {
         display: none;
       }
@@ -173,14 +192,7 @@
         min-height: 38px;
         max-height: 38px;
 
-        &.Mui-focused,
-        &:hover {
-          &:not(.Mui-disabled) {
-            border-color: $c-gray-dark;
-          }
-        }
         .MuiSelect-select {
-          border: 1px solid $c-gray;
           min-height: 38px;
           max-height: 38px;
           display: flex;
@@ -189,7 +201,7 @@
           color: $c-gray-dark;
 
           &:focus {
-            background-color: $c-white;
+            background-color: $c-gray-light;
           }
         }
 
@@ -198,34 +210,41 @@
         }
       }
     }
+
     &.theme-solid {
       .MuiFormHelperText-root {
         color: $c-danger !important;
         margin-left: 0;
       }
+
       &.with-start-andorment {
-        .MuiInputBase-adornedStart > .mdi {
+        .MuiInputBase-adornedStart>.mdi {
           color: $c-primary;
           margin-left: 0.5rem;
+
           @include rtl {
             margin-right: 0.5rem;
             margin-left: initial;
           }
         }
+
         &.theme-dark {
-          .MuiInputBase-adornedStart > .mdi {
+          .MuiInputBase-adornedStart>.mdi {
             color: $c-white;
           }
         }
       }
+
       .select-body-wrapper {
         @include d-flex;
         flex: 0 0 auto;
         position: relative;
         width: 100%;
+
         .MuiInput-underline.Mui-error:after {
           display: none;
         }
+
         .selects {
           border-radius: 0.3rem;
           background-color: $c-white;
@@ -237,25 +256,31 @@
           &.MuiInput-underline.Mui-focused:after {
             display: none;
           }
+
           &:hover:not([disabled]):not(.Mui-disabled) {
             border-color: #dbf5ee;
           }
+
           &.Mui-focused:not([disabled]):not(.Mui-disabled) {
             border-color: $c-primary !important;
             box-shadow: 0 0 2px 2px rgba($c-primary, 0.3);
           }
+
           &.Mui-error {
             border-color: $c-danger !important;
           }
+
           .MuiSelect-icon:not(.Mui-disabled) {
             fill: $c-red-dark;
           }
+
           .MuiSelect-select.MuiSelect-select {
             padding-right: 0.5rem;
             padding-left: 0.5rem;
             min-height: 20px;
             color: $c-gray-dark;
           }
+
           .MuiSelect-select {
             background-color: transparent !important;
           }
@@ -297,6 +322,7 @@
         }
       }
     }
+
     &.theme-transparent {
       border-radius: 0;
       width: 100%;
@@ -330,26 +356,32 @@
           border-bottom-color: $c-gray-primary;
         }
       }
+
       .MuiInput-underline:after {
         display: none;
       }
+
       .MuiInput-underline:not(.Mui-disabled)::before {
         border-bottom: 0;
       }
     }
+
     &.hide-arrow {
       .selects {
         padding-left: 0.5rem !important;
         padding-right: 0.5rem !important;
       }
+
       .dropdown-icon-wrapper {
         display: none !important;
       }
     }
+
     &.over-input-select {
       .selects {
         min-height: 30px !important;
       }
+
       .MuiSelect-root.MuiSelect-select.MuiSelect-selectMenu.MuiInputBase-input.MuiInput-input {
         padding: 0 1.5rem 0 0.5rem !important;
 
@@ -374,14 +406,17 @@
     border-radius: 1rem;
     background-color: #fafafa;
     border: 1px solid #f0f0f0;
+
     .MuiMenu-noOptions {
       color: $c-black-dark;
     }
+
     .MuiMenu-listbox {
       .MuiMenu-option {
         color: $c-black-dark;
       }
     }
+
     .MuiMenuItem-root {
       font-size: $fz-14px !important;
     }

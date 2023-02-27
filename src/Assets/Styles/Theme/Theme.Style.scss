@@ -17,7 +17,7 @@
 }
 
 body {
-  background-color: #f9f9ff;
+  background-color: #fefeff;
   font-size: $fz-default;
   font-family: $ff-default !important;
   color: $c-gray-primary;
@@ -61,6 +61,7 @@ hr {
 
 .MuiBackdrop-root {
   backdrop-filter: saturate(180%) blur(5px);
+  background-color: #00000017 !important;
 }
 
 @include rtl-in {

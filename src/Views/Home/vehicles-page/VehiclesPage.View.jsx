@@ -5,7 +5,6 @@ import {showError} from 'Helpers';
 import './VehiclesPage.scss';
 
 const VehiclesPageView = () => {
-  const [activeButton, setActiveButton] = useState('list');
   const [isLoading, setisLoading] = useState(false);
   const [vehicles, setVehicles] = useState({
     total_count: 0,
@@ -57,91 +56,66 @@ const VehiclesPageView = () => {
       <div className='page-header-wrapper'>
         <div className='page-title'>Vehicles</div>
         <div className='page-actions'>
-          <ButtonBase
-            className={`btns-icon btns-split-left c-primary ${activeButton === 'list' ? 'bg-primary c-white' : ''
-              }`}
-            onClick={() => setActiveButton('list')}>
-            <span className='mdi mdi-format-list-bulleted' />
-          </ButtonBase>
-          <ButtonBase
-            className={`btns-icon btns-split-right c-primary mr-3 ${activeButton === 'card' ? 'bg-primary c-white' : ''
-              }`}
-            onClick={() => setActiveButton('card')}>
-            <span className='mdi mdi-id-card' />
-          </ButtonBase>
-
-          <ButtonBase className='btns theme-primary c-white bg-primary pr-3' onClick={() => { }}>
+          <ButtonBase className='btns theme-primary c-white bg-secondary pr-3' onClick={() => { }}>
             <span className='mdi mdi-plus pr-1' />
             Register New Vehicle
           </ButtonBase>
         </div>
       </div>
 
-      {activeButton === 'list' ? (
-        <TablesComponent
-          headerData={[
-            {
-              id: 1,
-              label: 'Username',
-              input: 'user_name',
-            },
-            {
-              id: 2,
-              label: 'Full Name',
-              input: 'full_name',
-            },
-            {
-              id: 4,
-              label: 'Created Date',
-              input: 'created_date',
-              isDate: true,
-            },
-          ]}
-          isWithTableActions
-          pageIndex={filter.page - 1 || 0}
-          pageSize={filter.page_limit || 0}
-          onPageIndexChanged={onPageIndexChanged}
-          data={(vehicles && vehicles.results) || []}
-          totalItems={(vehicles && vehicles.total_count) || 25}
-          tableActionsOptions={{
-            component: (row) => (
-              <>
-                <Tooltip title='Edit'>
-                  <ButtonBase
-                    className='btns-icon theme-primary mr-3 c-info'
-                    onClick={(event) => {
-                      event.preventDefault();
-                      event.stopPropagation();
-                    }}>
-                    <span className='mdi mdi-account-edit' />
-                  </ButtonBase>
-                </Tooltip>
+      <TablesComponent
+        headerData={[
+          {
+            id: 1,
+            label: 'Username',
+            input: 'user_name',
+          },
+          {
+            id: 2,
+            label: 'Full Name',
+            input: 'full_name',
+          },
+          {
+            id: 4,
+            label: 'Created Date',
+            input: 'created_date',
+            isDate: true,
+          },
+        ]}
+        isWithTableActions
+        pageIndex={filter.page - 1 || 0}
+        pageSize={filter.page_limit || 0}
+        onPageIndexChanged={onPageIndexChanged}
+        data={(vehicles && vehicles.results) || []}
+        totalItems={(vehicles && vehicles.total_count) || 25}
+        tableActionsOptions={{
+          component: (row) => (
+            <>
+              <Tooltip title='Edit'>
+                <ButtonBase
+                  className='btns-icon theme-primary mr-3 c-info'
+                  onClick={(event) => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                  }}>
+                  <span className='mdi mdi-account-edit' />
+                </ButtonBase>
+              </Tooltip>
 
-                <Tooltip title='Delete'>
-                  <ButtonBase
-                    className='btns-icon theme-primary mr-3 c-danger'
-                    onClick={(event) => {
-                      event.preventDefault();
-                      event.stopPropagation();
-                    }}>
-                    <span className='mdi mdi-delete-forever' />
-                  </ButtonBase>
-                </Tooltip>
-              </>
-            ),
-          }}
-        />
-      ) : (
-        <div className='cards-wrapper'>
-          {vehicles &&
-            vehicles.results.length > 0 &&
-            vehicles.results.map((item, index) => (
-              <div key={`${index + 1}-card-item`} className='card-item'>
-                <div className='card-title'>{item.full_name}</div>
-              </div>
-            ))}
-        </div>
-      )}
+              <Tooltip title='Delete'>
+                <ButtonBase
+                  className='btns-icon theme-primary mr-3 c-danger'
+                  onClick={(event) => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                  }}>
+                  <span className='mdi mdi-delete-forever' />
+                </ButtonBase>
+              </Tooltip>
+            </>
+          ),
+        }}
+      />
     </div>
   );
 };

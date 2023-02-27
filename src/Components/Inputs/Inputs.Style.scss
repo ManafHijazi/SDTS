@@ -173,6 +173,8 @@
           &::placeholder {
             color: $c-gray-dark;
             opacity: 0.8;
+            font-weight: bold;
+            font-family: $ff-semibold;
           }
         }
       }
@@ -243,6 +245,8 @@
           &::placeholder {
             color: $c-gray-dark;
             opacity: 0.8;
+            font-weight: bold;
+            font-family: $ff-semibold;
           }
         }
       }
@@ -329,6 +333,8 @@
             color: $c-gray-dark;
             opacity: 0.8;
             font-size: 12px;
+            font-weight: bold;
+            font-family: $ff-semibold;
           }
         }
       }
@@ -369,6 +375,8 @@
 
           &::placeholder {
             color: $c-gray-dark;
+            font-weight: bold;
+            font-family: $ff-semibold;
             opacity: 0.65;
           }
         }
@@ -411,6 +419,8 @@
           &::placeholder {
             color: $c-gray-dark;
             opacity: 0.65;
+            font-weight: bold;
+            font-family: $ff-semibold;
           }
         }
       }
@@ -471,6 +481,8 @@
           &::placeholder {
             color: $c-gray-dark;
             opacity: 0.8;
+            font-weight: bold;
+            font-family: $ff-semibold;
           }
         }
       }
@@ -523,6 +535,8 @@
           &::placeholder {
             color: $c-white;
             opacity: 0.8;
+            font-weight: bold;
+            font-family: $ff-semibold;
           }
         }
       }
@@ -610,6 +624,8 @@
 
         &::placeholder {
           color: $c-error !important;
+          font-weight: bold;
+          font-family: $ff-semibold;
         }
       }
     }

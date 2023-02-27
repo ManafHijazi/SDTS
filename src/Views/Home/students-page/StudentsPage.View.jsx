@@ -1,5 +1,5 @@
 import React, {useState, useCallback, useEffect} from 'react';
-import {DialogComponent, Inputs, TablesComponent} from 'Components';
+import {DialogComponent, Inputs, TablesComponent, SelectComponent} from 'Components';
 import {ButtonBase, Tooltip} from '@mui/material';
 import {showError} from 'Helpers';
 import './StudentsPage.scss';
@@ -8,6 +8,7 @@ const StudentsPageView = () => {
   const [activeButton, setActiveButton] = useState('list');
   const [isLoading, setisLoading] = useState(false);
   const [isCreateDialogOpen, setiIsCreateDialogOpen] = useState(false);
+  const [isRegisterDialogOpen, setIsRegisterDialogOpen] = useState(false);
   const [students, setStudents] = useState({
     total_count: 0,
     results: [
@@ -25,7 +26,13 @@ const StudentsPageView = () => {
     page_limit: 5,
   });
   const [state, setState] = useState({
-    name: '',
+    qid: '',
+    course: ''
+  });
+  const [registerState, setRegisterState] = useState({
+    firstname: '',
+    lastname: '',
+    phone: ''
   });
 
   const onPageIndexChanged = (newIndex) => {
@@ -56,7 +63,23 @@ const StudentsPageView = () => {
     event.preventDefault();
     event.stopPropagation();
 
+    setState({
+      qid: '',
+      course: ''
+    });
     setiIsCreateDialogOpen(false)
+  };
+
+  const isOpenRegisterChanged = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    setRegisterState({
+      firstname: '',
+      lastname: '',
+      phone: ''
+    });
+    setIsRegisterDialogOpen(false);
   }
 
   useEffect(() => {
@@ -83,7 +106,7 @@ const StudentsPageView = () => {
 
           <ButtonBase className='btns theme-primary c-white bg-secondary pr-3' onClick={() => setiIsCreateDialogOpen(true)}>
             <span className='mdi mdi-plus pr-1' />
-            Register New Student
+            Create New Student
           </ButtonBase>
         </div>
       </div>
@@ -123,6 +146,8 @@ const StudentsPageView = () => {
                     onClick={(event) => {
                       event.preventDefault();
                       event.stopPropagation();
+
+                      setIsRegisterDialogOpen(true);
                     }}>
                     <span className='mdi mdi-account-edit' />
                   </ButtonBase>
@@ -155,6 +180,62 @@ const StudentsPageView = () => {
       )}
 
       <DialogComponent
+        maxWidth="sm"
+        saveIdRef="studentSaveDialogBtnId"
+        cancelIdRef="studentCancelDialogBtnId"
+        wrapperClasses="student-dilaog-wrapper"
+        dialogTitle='Create New Student'
+        dialogContent={
+          <div className="dialog-content">
+            <div className="dialog-filed">
+              <Inputs
+                autoFocus
+                value={state.qid}
+                idRef="studentQidInputId"
+                inputPlaceholder="QID"
+                onInputChanged={(event) => {
+                  const {value} = event.target;
+                  setState(items => ({...items, qid: value}));
+                }}
+              />
+            </div>
+            <div className="dialog-filed">
+              <SelectComponent
+                data={[{key: 'Course 1', value: 'Course 1'}, {key: 'Course 2', value: 'Course 2'}, {key: 'Course 3', value: 'Course 3'}, {key: 3, value: 'Course 4'}, {key: 4, value: 'Course 5'}]}
+                value={state.course || -1}
+                valueInput="key"
+                textInput="value"
+                defaultValue={-1}
+                onSelectChanged={(newValue) => {
+                  setState(items => ({...items, course: newValue}));
+                }}
+                emptyItem={{value: -1, text: "Select Course", isHiddenOnOpen: true}}
+              />
+            </div>
+          </div>
+        }
+        saveText='Save'
+        isOpen={isCreateDialogOpen}
+        cancelClasses="btns theme-outline"
+        onSaveClicked={isOpenCreateChanged}
+        saveClasses="btns theme-solid bg-primary"
+        onCloseClicked={() => {
+          setiIsCreateDialogOpen(false);
+          setState({
+            qid: '',
+            course: ''
+          });
+        }}
+        onCancelClicked={() => {
+          setiIsCreateDialogOpen(false);
+          setState({
+            qid: '',
+            course: ''
+          });
+        }}
+      />
+
+      <DialogComponent
         maxWidth="md"
         saveIdRef="studentSaveDialogBtnId"
         cancelIdRef="studentCancelDialogBtnId"
@@ -165,39 +246,58 @@ const StudentsPageView = () => {
             <div className="dialog-filed">
               <Inputs
                 autoFocus
-                minLength={3}
-                maxLength={51}
-                value={state.name}
-                error={state.name > 50}
-                idRef="studentNameInputId"
-                inputPlaceholder="Fullname"
-                helperText="The name can't exceed 50 characters"
+                value={state.firstname}
+                inputPlaceholder="First Name"
                 onInputChanged={(event) => {
                   const {value} = event.target;
-                  setState(items => ({...items, name: value}));
+                  setRegisterState(items => ({...items, firstname: value}));
                 }}
               />
             </div>
             <div className="dialog-filed">
               <Inputs
-                value={state.name}
-                idRef="studentEmailInputId"
-                inputPlaceholder="Email"
+                value={state.lastname}
+                inputPlaceholder="Last Name"
                 onInputChanged={(event) => {
                   const {value} = event.target;
-                  setState(items => ({...items, name: value}));
+                  setRegisterState(items => ({...items, lastname: value}));
+                }}
+              />
+            </div>
+            <div className="dialog-filed">
+              <Inputs
+                type="number"
+                value={state.phone}
+                inputPlaceholder="Phone Number"
+                onInputChanged={(event) => {
+                  const {value} = event.target;
+                  setRegisterState(items => ({...items, phone: value}));
                 }}
               />
             </div>
           </div>
         }
         saveText='Register'
-        isOpen={isCreateDialogOpen}
+        isOpen={isRegisterDialogOpen}
         cancelClasses="btns theme-outline"
-        onSaveClicked={isOpenCreateChanged}
+        onSaveClicked={isOpenRegisterChanged}
         saveClasses="btns theme-solid bg-primary"
-        onCloseClicked={() => setiIsCreateDialogOpen(false)}
-        onCancelClicked={() => setiIsCreateDialogOpen(false)}
+        onCloseClicked={() => {
+          setIsRegisterDialogOpen(false);
+          setRegisterState({
+            firstname: '',
+            lastname: '',
+            phone: ''
+          });
+        }}
+        onCancelClicked={() => {
+          setIsRegisterDialogOpen(false);
+          setRegisterState({
+            firstname: '',
+            lastname: '',
+            phone: ''
+          });
+        }}
       />
     </div>
   );

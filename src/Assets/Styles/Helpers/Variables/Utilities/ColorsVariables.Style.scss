@@ -43,13 +43,15 @@ $c-gray-lighter-more: #f6f7f9;
 $c-gray-lightest: #fafafa;
 // End New Colors
 
+$bg-primary-light: #dce0ff;
+
 $c-lavender: #e1e2fe;
 $c-error: #f44336;
 $bg-progress-gradient: linear-gradient(90deg, $c-warning 0%, $c-primary 45%, $c-success 100%);
 $bg-progress-gradient-reversed: linear-gradient(-90deg,
-                $c-warning 0%,
-                $c-primary 45%,
-                $c-success 100%);
+        $c-warning 0%,
+        $c-primary 45%,
+        $c-success 100%);
 $bg-gradient-primary: linear-gradient($c-primary-opacity, $c-secondary-opacity);
 $bg-gradient-primary-right: linear-gradient(to right, $c-primary 0%, $c-primary-dark 100%);
 $bg-gradient-primary-left: linear-gradient(to left, $c-primary 0%, $c-primary-dark 100%);
