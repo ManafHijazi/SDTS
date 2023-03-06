@@ -1,18 +1,35 @@
 import React, { useState, useCallback, useEffect } from 'react';
+import { GlobalHistory } from 'Helpers';
 import { TablesComponent } from 'Components';
 import { ButtonBase, Tooltip } from '@mui/material';
-import './VehiclesPage.scss';
+import './SchedulesPage.scss';
 
-const VehiclesPageView = () => {
+const SchedulesPageView = () => {
   const [isLoading, setisLoading] = useState(false);
   const [vehicles, setVehicles] = useState({
-    total_count: 0,
+    total_count: 3,
     results: [
-      { id: 1, user_name: 'testuser1', full_name: 'Test User 1', created_date: new Date() },
-      { id: 2, user_name: 'testuser2', full_name: 'Test User 2', created_date: new Date() },
-      { id: 3, user_name: 'testuser3', full_name: 'Test User 3', created_date: new Date() },
-      { id: 4, user_name: 'testuser4', full_name: 'Test User 4', created_date: new Date() },
-      { id: 5, user_name: 'testuser5', full_name: 'Test User 5', created_date: new Date() },
+      {
+        id: 1,
+        studentName: 'Zaid Ghazal',
+        trainerName: 'Trainer 1',
+        lessonDateTime: new Date(),
+        status: 'Done',
+      },
+      {
+        id: 2,
+        studentName: 'Ali Bustami',
+        trainerName: 'Trainer 2',
+        lessonDateTime: new Date(),
+        status: 'To Be',
+      },
+      {
+        id: 3,
+        studentName: 'Manaf Hijazi',
+        trainerName: 'Trainer 3',
+        lessonDateTime: new Date(),
+        status: 'Done',
+      },
     ],
   });
   const [filter, setFilter] = useState({
@@ -51,34 +68,33 @@ const VehiclesPageView = () => {
   }, [getAllVehicles]);
 
   return (
-    <div className='vehicles-wrapper view-wrapper'>
+    <div className='schedules-wrapper view-wrapper'>
       <div className='page-header-wrapper'>
-        <div className='page-title'>Vehicles</div>
-        <div className='page-actions'>
-          <ButtonBase className='btns theme-primary c-white bg-secondary pr-3' onClick={() => {}}>
-            <span className='mdi mdi-plus pr-1' />
-            Register New Vehicle
-          </ButtonBase>
-        </div>
+        <div className='page-title'>Scheduled Lessons</div>
       </div>
 
       <TablesComponent
         headerData={[
           {
             id: 1,
-            label: 'Username',
-            input: 'user_name',
+            label: 'Student Name',
+            input: 'studentName',
           },
           {
             id: 2,
-            label: 'Full Name',
-            input: 'full_name',
+            label: 'Trainer Name',
+            input: 'trainerName',
+          },
+          {
+            id: 3,
+            label: 'Lesson DateTime',
+            input: 'lessonDateTime',
+            isDate: true,
           },
           {
             id: 4,
-            label: 'Created Date',
-            input: 'created_date',
-            isDate: true,
+            label: 'Status',
+            input: 'status',
           },
         ]}
         isWithTableActions
@@ -96,8 +112,10 @@ const VehiclesPageView = () => {
                   onClick={(event) => {
                     event.preventDefault();
                     event.stopPropagation();
+
+                    GlobalHistory.push('/home/scheduling-page');
                   }}>
-                  <span className='mdi mdi-account-edit' />
+                  <span className='mdi mdi-pencil' />
                 </ButtonBase>
               </Tooltip>
 
@@ -119,4 +137,4 @@ const VehiclesPageView = () => {
   );
 };
 
-export default VehiclesPageView;
+export default SchedulesPageView;

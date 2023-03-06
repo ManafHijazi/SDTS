@@ -75,14 +75,23 @@
       width: 100%;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: space-around;
       padding-left: 1rem;
       padding-right: 1rem;
       flex-wrap: wrap;
 
       .dialog-filed {
-        width: 49%;
+        width: 50%;
         padding-bottom: 1rem;
+        padding-right: 1rem;
+      }
+    }
+
+    &.is-large {
+      .dialog-content {
+        .dialog-filed {
+          width: 32%;
+        }
       }
     }
 
@@ -99,7 +108,7 @@
       margin-bottom: 0.5rem;
     }
 
-    &.MuiDialogActions-spacing> :not(:first-child) {
+    &.MuiDialogActions-spacing > :not(:first-child) {
       margin: 0 !important;
     }
 

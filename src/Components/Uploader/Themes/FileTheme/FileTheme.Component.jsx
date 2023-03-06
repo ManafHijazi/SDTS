@@ -53,10 +53,9 @@ export const FileThemeComponent = memo(
             <div className='file-end-adornment-wrapper' ref={endAdornmentRef}>
               <ButtonBase
                 disabled={isDisabled}
-                className='btns theme-solid pr-3'
+                className='btns theme-solid theme-short bg-primary pr-3'
                 id={`themeFileUploadPhotpBtnRef${idRef}`}
-                onClick={() => uploadRef.current.click()}
-              >
+                onClick={() => uploadRef.current.click()}>
                 <span className='mdi mdi-tray-arrow-up mx-1' />
                 Upload
               </ButtonBase>
@@ -82,15 +81,14 @@ export const FileThemeComponent = memo(
               className={`drop-here${(allFiles.length > 0 && ' as-overlay') || ''}`}
               style={{
                 maxWidth: `calc(100% - ${endAdornmentWidth}px)`,
-              }}
-            >
+              }}>
               {t(`${translationPathShared}${dropHereText}`)}
             </div>
           )}
         </div>
       </div>
     );
-  },
+  }
 );
 
 FileThemeComponent.propTypes = {

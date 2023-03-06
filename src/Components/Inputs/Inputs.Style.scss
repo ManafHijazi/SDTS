@@ -4,7 +4,7 @@
   @include d-inline-flex-v-center;
   width: 100%;
 
-  label+.MuiInput-root.MuiInputBase-root {
+  label + .MuiInput-root.MuiInputBase-root {
     margin-top: 0;
   }
 
@@ -19,7 +19,7 @@
       margin: 0 1rem;
     }
 
-    .MuiInputLabel-animated+.MuiInput-formControl {
+    .MuiInputLabel-animated + .MuiInput-formControl {
       margin-top: 0;
     }
 
@@ -51,7 +51,7 @@
   }
 
   &.with-start-andorment {
-    .MuiInputBase-root>.mdi {
+    .MuiInputBase-root > .mdi {
       color: $c-gray-primary;
       margin-left: 0.5rem;
 
@@ -62,7 +62,7 @@
     }
 
     &.theme-dark {
-      .MuiInputBase-root>.mdi {
+      .MuiInputBase-root > .mdi {
         color: $c-white;
       }
     }
@@ -524,7 +524,7 @@
           border: 1px solid $c-white;
           color: $c-white;
 
-          >.mdi {
+          > .mdi {
             color: $c-white;
           }
         }
@@ -546,7 +546,6 @@
   &:not(.theme-underline),
   &:not(.theme-underline-light) {
     .MuiInput-underline {
-
       &:before,
       &:after {
         display: none;

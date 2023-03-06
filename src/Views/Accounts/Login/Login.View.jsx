@@ -21,16 +21,16 @@ const LoginView = () => {
     if (response) {
       const data = {
         access_token: 'test_token',
-        email: 'test@test.com',
+        email: 'zaid@sdts.com',
         first_login: false,
-        first_name: 'Manaf',
+        first_name: 'Zaid',
         is_deleted: false,
-        last_name: 'Hijazi',
+        last_name: 'Ghazal',
         profile_picture: '',
         roles: [{ role_id: 1, role_name: 'SUPER_USER' }],
         super_user: false,
         user_id: 1,
-        user_name: 'mhijazi',
+        user_name: 'zghazal',
       };
 
       localStorage.setItem('access_token', data.access_token);

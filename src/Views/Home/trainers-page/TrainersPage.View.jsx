@@ -1,19 +1,59 @@
-import React, {useState, useCallback, useEffect} from 'react';
-import {TablesComponent} from 'Components';
-import {ButtonBase, Tooltip} from '@mui/material';
-import {showError} from 'Helpers';
+import React, { useState, useCallback, useEffect } from 'react';
+import {
+  Datepicker,
+  DialogComponent,
+  Inputs,
+  SelectComponent,
+  TablesComponent,
+  UploaderComponent,
+} from 'Components';
+import { ButtonBase, Tooltip } from '@mui/material';
 import './TrainersPage.scss';
+import dayjs from 'dayjs';
+import { UploaderThemesEnum } from 'enums';
 
 const TrainersPageView = () => {
   const [isLoading, setisLoading] = useState(false);
+  const [isRegisterDialogOpen, setIsRegisterDialogOpen] = useState(false);
   const [trainers, setTrainers] = useState({
-    total_count: 0,
+    total_count: 25,
     results: [
-      {id: 1, user_name: 'testuser1', full_name: 'Test User 1', created_date: new Date()},
-      {id: 2, user_name: 'testuser2', full_name: 'Test User 2', created_date: new Date()},
-      {id: 3, user_name: 'testuser3', full_name: 'Test User 3', created_date: new Date()},
-      {id: 4, user_name: 'testuser4', full_name: 'Test User 4', created_date: new Date()},
-      {id: 5, user_name: 'testuser5', full_name: 'Test User 5', created_date: new Date()},
+      {
+        id: 1,
+        qid: '4564768i7',
+        name: 'Trainer 1',
+        phone: '+97042354354',
+        nationality: 'Jordanian',
+        gender: 'Male',
+        languages: 'Arabic, English',
+        permit: 'Valid',
+        registerationDate: new Date(),
+        status: 'Active',
+      },
+      {
+        id: 2,
+        qid: '56758697',
+        name: 'Trainer 2',
+        phone: '+9704236d546',
+        nationality: 'Qatari',
+        gender: 'Male',
+        languages: 'Arabic, English',
+        permit: 'Valid',
+        registerationDate: new Date(),
+        status: 'Deactivated',
+      },
+      {
+        id: 3,
+        qid: '098765345',
+        name: 'Trainer 3',
+        phone: '+97045645354',
+        nationality: 'Indian',
+        gender: 'Male',
+        languages: 'English',
+        permit: 'Valid',
+        registerationDate: new Date(),
+        status: 'Terminated',
+      },
     ],
   });
   const [filter, setFilter] = useState({
@@ -22,9 +62,38 @@ const TrainersPageView = () => {
     page: 1,
     page_limit: 5,
   });
+  const [profilePicture, setProfilePicture] = useState([]);
+  const [passportPhoto, setPassportPhoto] = useState([]);
+  const [qidFront, setQidFront] = useState([]);
+  const [qidBack, setQidBack] = useState([]);
+  const [trainingFront, setTrainingFront] = useState([]);
+  const [trainingBack, setTrainingBack] = useState([]);
+  const [registerState, setRegisterState] = useState({
+    name: '',
+    personalPhoto: '',
+    qid: '',
+    qidDate: '',
+    phone: '',
+    gender: '',
+    dob: '',
+    nationality: '',
+    languages: [],
+    passportPhoto: '',
+    qidFrontSidePhoto: '',
+    qidBackSidePhoto: '',
+    educational: '',
+    trainingFrontPermitPhoto: '',
+    trainingBackPermitPhoto: '',
+    trainingPermitExpiryDate: '',
+    experienceInQatar: '',
+    experienceAbroad: '',
+    licenseType: [],
+    categories: [],
+    trainingPermit: [],
+  });
 
   const onPageIndexChanged = (newIndex) => {
-    setFilter((items) => ({...items, page: newIndex}));
+    setFilter((items) => ({ ...items, page: newIndex }));
   };
 
   const getAllTrainers = useCallback(async () => {
@@ -33,7 +102,7 @@ const TrainersPageView = () => {
     const response = {};
 
     if (response && response.data && response.status === 200) {
-      const {data} = response;
+      const { data } = response;
 
       setStudents(data);
     } else {
@@ -47,6 +116,36 @@ const TrainersPageView = () => {
     setisLoading(false);
   }, [filter]);
 
+  const isOpenRegisterChanged = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    setRegisterState({
+      name: '',
+      qid: '',
+      qidDate: '',
+      phone: '',
+      gender: '',
+      dob: '',
+      personalPhoto: '',
+      nationality: '',
+      languages: [],
+      passportPhoto: '',
+      qidFrontSidePhoto: '',
+      qidBackSidePhoto: '',
+      educational: '',
+      trainingFrontPermitPhoto: '',
+      trainingBackPermitPhoto: '',
+      trainingPermitExpiryDate: '',
+      experienceInQatar: '',
+      experienceAbroad: '',
+      licenseType: [],
+      categories: [],
+      trainingPermit: [],
+    });
+    setIsRegisterDialogOpen(false);
+  };
+
   useEffect(() => {
     getAllTrainers();
   }, [getAllTrainers]);
@@ -56,7 +155,9 @@ const TrainersPageView = () => {
       <div className='page-header-wrapper'>
         <div className='page-title'>Trainers</div>
         <div className='page-actions'>
-          <ButtonBase className='btns theme-primary c-white bg-secondary pr-3' onClick={() => { }}>
+          <ButtonBase
+            className='btns theme-primary c-white bg-secondary pr-3'
+            onClick={() => setIsRegisterDialogOpen(true)}>
             <span className='mdi mdi-plus pr-1' />
             Register New Trainer
           </ButtonBase>
@@ -67,19 +168,49 @@ const TrainersPageView = () => {
         headerData={[
           {
             id: 1,
-            label: 'Username',
-            input: 'user_name',
+            label: 'QID',
+            input: 'qid',
           },
           {
             id: 2,
-            label: 'Full Name',
-            input: 'full_name',
+            label: 'Name',
+            input: 'name',
+          },
+          {
+            id: 3,
+            label: 'Phone Number',
+            input: 'phone',
           },
           {
             id: 4,
-            label: 'Created Date',
-            input: 'created_date',
+            label: 'Nationality',
+            input: 'nationality',
+          },
+          {
+            id: 5,
+            label: 'Gender',
+            input: 'gender',
+          },
+          {
+            id: 6,
+            label: 'Languages',
+            input: 'languages',
+          },
+          {
+            id: 7,
+            label: 'Training Permit',
+            input: 'permit',
+          },
+          {
+            id: 8,
+            label: 'ُRegistration Date',
+            input: 'registerationDate',
             isDate: true,
+          },
+          {
+            id: 9,
+            label: 'ُStatus',
+            input: 'status',
           },
         ]}
         isWithTableActions
@@ -91,17 +222,6 @@ const TrainersPageView = () => {
         tableActionsOptions={{
           component: (row) => (
             <>
-              <Tooltip title='Edit'>
-                <ButtonBase
-                  className='btns-icon theme-primary mr-3 c-info'
-                  onClick={(event) => {
-                    event.preventDefault();
-                    event.stopPropagation();
-                  }}>
-                  <span className='mdi mdi-account-edit' />
-                </ButtonBase>
-              </Tooltip>
-
               <Tooltip title='Delete'>
                 <ButtonBase
                   className='btns-icon theme-primary mr-3 c-danger'
@@ -114,6 +234,378 @@ const TrainersPageView = () => {
               </Tooltip>
             </>
           ),
+        }}
+      />
+
+      <DialogComponent
+        maxWidth='xl'
+        saveIdRef='studentSaveDialogBtnId'
+        cancelIdRef='studentCancelDialogBtnId'
+        wrapperClasses='student-dilaog-wrapper'
+        dialogTitle='Register New Student'
+        dialogContent={
+          <div className='dialog-content'>
+            <div className='dialog-filed'>
+              <Inputs
+                autoFocus
+                value={registerState.name}
+                inputPlaceholder='Name'
+                onInputChanged={(event) => {
+                  const { value } = event.target;
+                  setRegisterState((items) => ({ ...items, name: value }));
+                }}
+              />
+            </div>
+            <div className='dialog-filed'>
+              <Inputs
+                value={registerState.qid}
+                inputPlaceholder='QID'
+                onInputChanged={(event) => {
+                  const { value } = event.target;
+                  setRegisterState((items) => ({ ...items, qid: value }));
+                }}
+              />
+            </div>
+            <div className='dialog-filed'>
+              <Datepicker
+                maxDate={dayjs('2100-01-1')}
+                label='QID Expiry Date'
+                value={registerState.qidDate}
+                onChange={(value) => {
+                  if (value) setRegisterState((items) => ({ ...items, qidDate: value }));
+                }}
+              />
+            </div>
+            <div className='dialog-filed'>
+              <Inputs
+                type='number'
+                value={+registerState.phone || ''}
+                inputPlaceholder='Phone'
+                onInputChanged={(event) => {
+                  const { value } = event.target;
+                  setRegisterState((items) => ({ ...items, phone: +value }));
+                }}
+              />
+            </div>
+            <div className='dialog-filed'>
+              <Inputs
+                value={registerState.gender}
+                inputPlaceholder='Gender'
+                onInputChanged={(event) => {
+                  const { value } = event.target;
+                  setRegisterState((items) => ({ ...items, gender: value }));
+                }}
+              />
+            </div>
+            <div className='dialog-filed'>
+              <Datepicker
+                label='Birth Date'
+                value={registerState.dob}
+                maxDate={dayjs('2023-03-6')}
+                onChange={(value) => {
+                  if (value) setRegisterState((items) => ({ ...items, dob: value }));
+                }}
+              />
+            </div>
+            <div className='dialog-filed'>
+              <SelectComponent
+                data={[
+                  { key: 'Algeria', value: 'Algeria' },
+                  { key: 'Bahrain', value: 'Bahrain' },
+                  { key: 'Djibouti', value: 'Djibouti' },
+                  { key: 'Egypt', value: 'Egypt' },
+                  { key: 'Iraq', value: 'Iraq' },
+                  { key: 'Jordan', value: 'Jordan' },
+                  { key: 'Kuwait', value: 'Kuwait' },
+                  { key: 'Lebanon', value: 'Lebanon' },
+                  { key: 'Libya', value: 'Libya' },
+                  { key: 'Morocco', value: 'Morocco' },
+                  { key: 'Mauritania', value: 'Mauritania' },
+                  { key: 'Oman', value: 'Oman' },
+                  { key: 'Palestine', value: 'Palestine' },
+                  { key: 'Qatar', value: 'Qatar' },
+                  { key: 'Saudi Arabia', value: 'Saudi Arabia' },
+                  { key: 'Somalia', value: 'Somalia' },
+                  { key: 'Sudan', value: 'Sudan' },
+                  { key: 'Syria', value: 'Syria' },
+                  { key: 'Tunisia', value: 'Tunisia' },
+                  { key: 'United Arab Emirates', value: 'United Arab Emirates' },
+                  { key: 'Yemen', value: 'Yemen' },
+                ]}
+                value={registerState.nationality || -1}
+                valueInput='key'
+                textInput='value'
+                defaultValue={-1}
+                onSelectChanged={(newValue) => {
+                  setRegisterState((items) => ({ ...items, nationality: newValue }));
+                }}
+                emptyItem={{ value: -1, text: 'Nationality', isHiddenOnOpen: true }}
+              />
+            </div>
+            <div className='dialog-filed'>
+              <SelectComponent
+                data={[
+                  { key: 'Arabic', value: 'Arabic' },
+                  { key: 'English', value: 'English' },
+                  { key: 'Indian', value: 'Indian' },
+                  { key: 'French', value: 'French' },
+                  { key: 'Spanish', value: 'Spanish' },
+                  { key: 'Italian', value: 'Italian' },
+                  { key: 'Languages', value: 'Languages', isHiddenOnOpen: true },
+                ]}
+                multiple
+                value={['Languages', ...registerState.languages] || [-1]}
+                valueInput='key'
+                textInput='value'
+                getIsChecked={(listItem) =>
+                  registerState.languages.findIndex((el) => el === listItem.key) !== -1
+                }
+                defaultValue={-1}
+                placeholder='Languages'
+                onSelectChanged={(newValue) => {
+                  setRegisterState((items) => ({ ...items, languages: newValue }));
+                }}
+                emptyItem={{ key: -1, value: 'Languages', isHiddenOnOpen: true }}
+              />
+            </div>
+            <div className='dialog-filed'>
+              <SelectComponent
+                data={[
+                  { key: 'High School', value: 'High School' },
+                  { key: 'College', value: 'College' },
+                  { key: 'Bachelor', value: 'Bachelor' },
+                  { key: 'Master', value: 'Master' },
+                  { key: 'PhD', value: 'PhD' },
+                ]}
+                value={registerState.educational || -1}
+                valueInput='key'
+                textInput='value'
+                defaultValue={-1}
+                onSelectChanged={(newValue) => {
+                  setRegisterState((items) => ({ ...items, educational: newValue }));
+                }}
+                emptyItem={{ value: -1, text: 'Educational Level', isHiddenOnOpen: true }}
+              />
+            </div>
+            <div className='dialog-filed'>
+              <Inputs
+                type='number'
+                value={+registerState.experienceInQatar || ''}
+                inputPlaceholder='Experience in Qatar (Years)'
+                onInputChanged={(event) => {
+                  const { value } = event.target;
+                  setRegisterState((items) => ({ ...items, experienceInQatar: +value }));
+                }}
+              />
+            </div>
+            <div className='dialog-filed'>
+              <Inputs
+                type='number'
+                value={+registerState.experienceAbroad || ''}
+                inputPlaceholder='Experience Abroad (Years)'
+                onInputChanged={(event) => {
+                  const { value } = event.target;
+                  setRegisterState((items) => ({ ...items, experienceAbroad: +value }));
+                }}
+              />
+            </div>
+            <div className='dialog-filed'>
+              <SelectComponent
+                data={[
+                  { key: 'Car', value: 'Car' },
+                  { key: 'Excavator', value: 'Excavator' },
+                  { key: 'MotorCycle', value: 'MotorCycle' },
+                  { key: 'Trailer', value: 'Trailer' },
+                  { key: 'Med.Truck', value: 'Med.Truck' },
+                  { key: 'Crane،', value: 'Crane،' },
+                  { key: 'Bus', value: 'Bus' },
+                  { key: 'License Type', value: 'License Type', isHiddenOnOpen: true },
+                ]}
+                multiple
+                value={['License Type', ...registerState.licenseType] || [-1]}
+                valueInput='key'
+                textInput='value'
+                getIsChecked={(listItem) =>
+                  registerState.licenseType.findIndex((el) => el === listItem.key) !== -1
+                }
+                defaultValue={-1}
+                placeholder='License Type'
+                onSelectChanged={(newValue) => {
+                  setRegisterState((items) => ({ ...items, licenseType: newValue }));
+                }}
+                emptyItem={{ key: -1, value: 'License Type', isHiddenOnOpen: true }}
+              />
+            </div>
+            <div className='d-flex align-center w-100 pl-2 mb-4'>
+              <div className='dialog-filed mr-3'>
+                <SelectComponent
+                  data={[
+                    {
+                      key: 'Regular Light Vehicle Female - Manual',
+                      value: 'Regular Light Vehicle Female - Manual',
+                    },
+                    { key: 'Regular Light Vehicle - Auto', value: 'Regular Light Vehicle - Auto' },
+                    { key: 'MotorCycle', value: 'MotorCycle' },
+                    { key: 'Trailer', value: 'Trailer' },
+                    { key: 'Crane،', value: 'Crane،' },
+                    { key: 'Bus', value: 'Bus' },
+                    { key: 'Categories', value: 'Categories', isHiddenOnOpen: true },
+                  ]}
+                  multiple
+                  value={['Categories', ...registerState.categories] || [-1]}
+                  valueInput='key'
+                  textInput='value'
+                  getIsChecked={(listItem) =>
+                    registerState.categories.findIndex((el) => el === listItem.key) !== -1
+                  }
+                  defaultValue={-1}
+                  placeholder='Categories'
+                  onSelectChanged={(newValue) => {
+                    setRegisterState((items) => ({ ...items, categories: newValue }));
+                  }}
+                  emptyItem={{ key: -1, value: 'Categories', isHiddenOnOpen: true }}
+                />
+              </div>
+              <div className='dialog-filed ml-2'>
+                <SelectComponent
+                  data={[
+                    { key: 'Car', value: 'Car' },
+                    { key: 'Excavator', value: 'Excavator' },
+                    { key: 'MotorCycle', value: 'MotorCycle' },
+                    { key: 'Trailer', value: 'Trailer' },
+                    { key: 'Med.Truck', value: 'Med.Truck' },
+                    { key: 'Crane،', value: 'Crane،' },
+                    { key: 'Bus', value: 'Bus' },
+                    { key: 'Training Permit', value: 'Training Permit', isHiddenOnOpen: true },
+                  ]}
+                  multiple
+                  value={['Training Permit', ...registerState.trainingPermit] || [-1]}
+                  valueInput='key'
+                  textInput='value'
+                  getIsChecked={(listItem) =>
+                    registerState.trainingPermit.findIndex((el) => el === listItem.key) !== -1
+                  }
+                  defaultValue={-1}
+                  placeholder='Training Permit'
+                  onSelectChanged={(newValue) => {
+                    setRegisterState((items) => ({ ...items, trainingPermit: newValue }));
+                  }}
+                  emptyItem={{ key: -1, value: 'Training Permit', isHiddenOnOpen: true }}
+                />
+              </div>
+            </div>
+
+            <div className='dialog-filed'>
+              <UploaderComponent
+                accept='image/*'
+                uploadedFiles={profilePicture || null}
+                inputPlaceholder='Personal Photo'
+                uploadedFileChanged={(newFiles) => setProfilePicture(newFiles)}
+              />
+            </div>
+            <div className='dialog-filed'>
+              <UploaderComponent
+                accept='image/*'
+                uploadedFiles={passportPhoto || null}
+                componentTheme={UploaderThemesEnum.File}
+                inputPlaceholder='Passport Photo'
+                uploadedFileChanged={(newFiles) => setPassportPhoto(newFiles)}
+              />
+            </div>
+            <div className='dialog-filed'>
+              <UploaderComponent
+                accept='image/*'
+                uploadedFiles={qidFront || null}
+                componentTheme={UploaderThemesEnum.File}
+                inputPlaceholder='QID Front Side Photo'
+                uploadedFileChanged={(newFiles) => setQidFront(newFiles)}
+              />
+            </div>
+            <div className='dialog-filed'>
+              <UploaderComponent
+                accept='image/*'
+                uploadedFiles={qidBack || null}
+                componentTheme={UploaderThemesEnum.File}
+                inputPlaceholder='QID Back Side Photo'
+                uploadedFileChanged={(newFiles) => setQidBack(newFiles)}
+              />
+            </div>
+            <div className='dialog-filed'>
+              <UploaderComponent
+                accept='image/*'
+                uploadedFiles={trainingFront || null}
+                componentTheme={UploaderThemesEnum.File}
+                inputPlaceholder='Training Front Permit Photo'
+                uploadedFileChanged={(newFiles) => setTrainingFront(newFiles)}
+              />
+            </div>
+            <div className='dialog-filed'>
+              <UploaderComponent
+                accept='image/*'
+                uploadedFiles={trainingBack || null}
+                componentTheme={UploaderThemesEnum.File}
+                inputPlaceholder='Training Back Permit Photo'
+                uploadedFileChanged={(newFiles) => setTrainingBack(newFiles)}
+              />
+            </div>
+          </div>
+        }
+        saveText='Register'
+        isOpen={isRegisterDialogOpen}
+        cancelClasses='btns theme-outline'
+        onSaveClicked={isOpenRegisterChanged}
+        saveClasses='btns theme-solid bg-primary'
+        onCloseClicked={() => {
+          setIsRegisterDialogOpen(false);
+          setRegisterState({
+            name: '',
+            personalPhoto: '',
+            qid: '',
+            qidDate: '',
+            phone: '',
+            gender: '',
+            dob: '',
+            nationality: '',
+            languages: [],
+            passportPhoto: '',
+            qidFrontSidePhoto: '',
+            qidBackSidePhoto: '',
+            educational: '',
+            trainingFrontPermitPhoto: '',
+            trainingBackPermitPhoto: '',
+            trainingPermitExpiryDate: '',
+            experienceInQatar: '',
+            experienceAbroad: '',
+            licenseType: [],
+            categories: [],
+            trainingPermit: [],
+          });
+        }}
+        onCancelClicked={() => {
+          setIsRegisterDialogOpen(false);
+          setRegisterState({
+            name: '',
+            personalPhoto: '',
+            qid: '',
+            qidDate: '',
+            phone: '',
+            gender: '',
+            dob: '',
+            nationality: '',
+            languages: [],
+            passportPhoto: '',
+            qidFrontSidePhoto: '',
+            qidBackSidePhoto: '',
+            educational: '',
+            trainingFrontPermitPhoto: '',
+            trainingBackPermitPhoto: '',
+            trainingPermitExpiryDate: '',
+            experienceInQatar: '',
+            experienceAbroad: '',
+            licenseType: [],
+            categories: [],
+            trainingPermit: [],
+          });
         }}
       />
     </div>

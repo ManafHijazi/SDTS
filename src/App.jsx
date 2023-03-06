@@ -3,7 +3,6 @@ import axios from 'axios';
 import { AppRoutes } from './Routes';
 import { SwitchRouteComponent } from './Components';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { SetGlobalSocketReducer } from './Helpers/Middleware.Helper';
 import { GlobalToasterGenerator, MiddlewareHelper, SetGlobalRerender } from './Helpers';
 
 const App = () => {

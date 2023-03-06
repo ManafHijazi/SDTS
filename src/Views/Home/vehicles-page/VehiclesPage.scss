@@ -17,28 +17,4 @@
       font-family: $ff-semibold;
     }
   }
-
-  .cards-wrapper {
-    padding: 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-
-    .card-item {
-      background-color: white;
-      box-shadow: $bs-secondary;
-      border-radius: 1rem;
-      padding: 1rem;
-      width: 25%;
-      margin-right: 1rem;
-      min-height: 15rem;
-
-      .card-title {
-        color: $c-primary-dark;
-        font-family: $ff-semibold;
-        font-size: 14px;
-      }
-    }
-  }
 }

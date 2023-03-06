@@ -180,8 +180,9 @@
     color: $c-gray-darker;
 
     &:disabled {
-      background-color: transparent !important;
-      color: $c-gray !important;
+      background-color: $c-gray-light !important;
+      color: $c-gray-darker !important;
+      border: 1px solid $c-gray;
     }
 
     // &:not([disabled]):hover {

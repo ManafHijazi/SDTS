@@ -8,7 +8,7 @@ import {
   CircularProgress,
 } from '@mui/material';
 import PropTypes from 'prop-types';
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import './Dialog.Style.scss';
 
 export const DialogComponent = ({
@@ -74,7 +74,7 @@ export const DialogComponent = ({
   saveIdRef,
   cancelIdRef,
 }) => {
-  const {t} = useTranslation([parentTranslationPath, 'Shared']);
+  const { t } = useTranslation([parentTranslationPath, 'Shared']);
 
   return (
     <Dialog
@@ -90,13 +90,12 @@ export const DialogComponent = ({
           },
         }
       }
-      maxWidth={(isConfirm && !maxWidth && defaultConfirmMaxWidth) || maxWidth || defaultMaxWidth}
-    >
+      maxWidth={(isConfirm && !maxWidth && defaultConfirmMaxWidth) || maxWidth || defaultMaxWidth}>
       <form className='w-100' noValidate id={dialogFormId} onSubmit={onSubmit}>
         <DialogTitle
-          className={`dialog-title-wrapper ${titleClasses} ${(dialogTitle && ' with-custom-title') || ''
-            }`}
-        >
+          className={`dialog-title-wrapper ${titleClasses} ${
+            (dialogTitle && ' with-custom-title') || ''
+          }`}>
           {(!dialogTitle && (isConfirm || titleText) && (
             <span className={`dialog-title-text ${titleTextClasses}`}>
               {(isConfirm && !titleText && t(`${translationPathShared}confirm-message`)) ||
@@ -108,17 +107,17 @@ export const DialogComponent = ({
             <ButtonBase
               className={`close-btn-wrapper ${closeClasses}`}
               onClick={onCloseClicked}
-              disabled={closeIsDisabled}
-            >
+              disabled={closeIsDisabled}>
               <span className='mdi mdi-close' />
             </ButtonBase>
           )}
         </DialogTitle>
         <div className='content-and-footer-wrapper'>
           <DialogContent
-            style={{minHeight}}
-            className={`dialog-content-wrapper ${contentClasses}`}
-          >
+            style={{ minHeight }}
+            className={`dialog-content-wrapper ${contentClasses} ${
+              maxWidth === 'xl' ? 'is-large' : ''
+            }`}>
             {dialogContent || undefined}
           </DialogContent>
           <DialogActions className={`dialog-footer-wrapper ${footerClasses}`}>
@@ -130,8 +129,7 @@ export const DialogComponent = ({
                       className={previousClasses}
                       type={previousType}
                       onClick={onPreviousClicked}
-                      disabled={previousIsDisabled}
-                    >
+                      disabled={previousIsDisabled}>
                       <span>{t(`${translationPathShared}back`)}</span>
                     </ButtonBase>
                   )}
@@ -140,8 +138,7 @@ export const DialogComponent = ({
                       className={nextClasses}
                       type={nextType}
                       onClick={onNextClicked}
-                      disabled={nextIsDisabled}
-                    >
+                      disabled={nextIsDisabled}>
                       <span>{t(`${translationPathShared}next`)}</span>
                     </ButtonBase>
                   )}
@@ -156,21 +153,22 @@ export const DialogComponent = ({
                         <div className={`save-wrapper ${saveWrapperClasses}`}>
                           <ButtonBase
                             id={saveIdRef}
-                            className={`save-btn-wrapper ${saveClasses}${(isConfirm && !isWithoutConfirmClasses && ' bg-danger') || ''
-                              }${(isEdit && ' bg-secondary') || ''}`}
+                            className={`save-btn-wrapper ${saveClasses}${
+                              (isConfirm && !isWithoutConfirmClasses && ' bg-danger') || ''
+                            }${(isEdit && ' bg-secondary') || ''}`}
                             type={saveType}
                             onClick={onSaveClicked}
-                            disabled={saveIsDisabled || isSaving}
-                          >
+                            disabled={saveIsDisabled || isSaving}>
                             {isWithIcon && <span className='mdi mdi-camera mx-1' />}
                             <span>
                               {(isConfirm &&
                                 saveText === 'save' &&
                                 t(`${translationPathShared}confirm`)) ||
                                 t(
-                                  `${(saveText === 'save' && translationPathShared) ||
-                                  translationPath
-                                  }${saveText}`,
+                                  `${
+                                    (saveText === 'save' && translationPathShared) ||
+                                    translationPath
+                                  }${saveText}`
                                 )}
                             </span>
                           </ButtonBase>
@@ -183,8 +181,7 @@ export const DialogComponent = ({
                             className={`cancel-btn-wrapper ${confirmClasses}`}
                             type={cancelType}
                             onClick={onConfirmClicked}
-                            disabled={cancelIsDisabled}
-                          >
+                            disabled={cancelIsDisabled}>
                             <span>{confirmText}</span>
                           </ButtonBase>
                         </div>
@@ -196,8 +193,7 @@ export const DialogComponent = ({
                             className={`cancel-btn-wrapper ${cancelClasses}`}
                             type={cancelType}
                             onClick={onCancelClicked}
-                            disabled={cancelIsDisabled}
-                          >
+                            disabled={cancelIsDisabled}>
                             <span>{cancelText}</span>
                           </ButtonBase>
                         </div>
@@ -212,13 +208,13 @@ export const DialogComponent = ({
                             className={`cancel-btn-wrapper ${cancelClasses}`}
                             type={cancelType}
                             onClick={onCancelClicked}
-                            disabled={cancelIsDisabled}
-                          >
+                            disabled={cancelIsDisabled}>
                             <span>
                               {t(
-                                `${(cancelText === 'cancel' && translationPathShared) ||
-                                translationPath
-                                }${cancelText}`,
+                                `${
+                                  (cancelText === 'cancel' && translationPathShared) ||
+                                  translationPath
+                                }${cancelText}`
                               )}
                             </span>
                           </ButtonBase>
@@ -228,21 +224,22 @@ export const DialogComponent = ({
                         <div className={`save-wrapper ${saveWrapperClasses}`}>
                           <ButtonBase
                             id={saveIdRef}
-                            className={`save-btn-wrapper ${saveClasses}${(isConfirm && !isWithoutConfirmClasses && ' bg-danger') || ''
-                              }${(isEdit && ' bg-secondary') || ''}`}
+                            className={`save-btn-wrapper ${saveClasses}${
+                              (isConfirm && !isWithoutConfirmClasses && ' bg-danger') || ''
+                            }${(isEdit && ' bg-secondary') || ''}`}
                             type={saveType}
                             onClick={onSaveClicked}
-                            disabled={saveIsDisabled || isSaving}
-                          >
+                            disabled={saveIsDisabled || isSaving}>
                             {isSaveLoading && <CircularProgress />}
                             <span>
                               {(isConfirm &&
                                 saveText === 'save' &&
                                 t(`${translationPathShared}confirm`)) ||
                                 t(
-                                  `${(saveText === 'save' && translationPathShared) ||
-                                  translationPath
-                                  }${saveText}`,
+                                  `${
+                                    (saveText === 'save' && translationPathShared) ||
+                                    translationPath
+                                  }${saveText}`
                                 )}
                             </span>
                           </ButtonBase>

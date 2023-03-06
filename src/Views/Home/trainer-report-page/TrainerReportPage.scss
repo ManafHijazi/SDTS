@@ -1,6 +1,6 @@
 @import 'src/Assets/Styles/Helpers/Helpers.Style.scss';
 
-.courses-wrapper {
+.scheduling-wrapper {
   background-color: white;
   box-shadow: $bs-primary;
 
@@ -16,5 +16,9 @@
       color: $c-primary;
       font-family: $ff-semibold;
     }
+  }
+
+  .page-content {
+    padding: 2rem 1.5rem;
   }
 }

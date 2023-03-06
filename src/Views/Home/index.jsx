@@ -3,3 +3,7 @@ export * from './students-page/StudentsPage.View';
 export * from './trainers-page/TrainersPage.View';
 export * from './vehicles-page/VehiclesPage.View';
 export * from './courses-page/CoursesPage.View';
+export * from './scheduling-page/SchedulingPage.View';
+export * from './schedules-page/SchedulesPage.View';
+export * from './result-entry-page/ResultEntryPage.View';
+export * from './trainer-report-page/TrainerReportPage.View';

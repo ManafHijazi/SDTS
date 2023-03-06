@@ -1,0 +1,112 @@
+@import 'src/Assets/Styles/Helpers/Helpers.Style.scss';
+
+.scheduling-wrapper {
+  background-color: white;
+  box-shadow: $bs-primary;
+
+  .page-header-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem 0 1.5rem;
+
+    .page-title {
+      font-weight: bold;
+      font-size: 20px;
+      color: $c-primary;
+      font-family: $ff-semibold;
+    }
+  }
+
+  .page-content {
+    padding: 2rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+
+    .field-items {
+      display: flex;
+      flex-direction: column;
+      width: 30%;
+    }
+
+    .time-picker-wrapper {
+      .MuiFormControl-root {
+        width: 100%;
+      }
+      .MuiInputBase-root {
+        font-size: 14px;
+        color: $c-gray-primary;
+        background-color: $c-gray-light;
+        height: 2.5rem;
+      }
+      .MuiOutlinedInput-notchedOutline {
+        border: 0 solid transparent !important;
+      }
+      .MuiFormLabel-root {
+        font-size: 14px;
+        margin-top: -0.4rem;
+      }
+    }
+
+    .list-wrapper {
+      width: 60%;
+      border-left: 1px solid $c-gray-light;
+      display: flex;
+      justify-content: space-between;
+      padding-left: 5rem;
+
+      .btns-wrapper {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+      }
+    }
+  }
+}
+
+.list-item-wrapper {
+  background-color: white;
+  box-shadow: $bs-secondary;
+  padding: 1rem;
+  border-radius: 1rem;
+  width: 45%;
+
+  .card-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-bottom: 1px solid $c-gray-dark;
+    padding-bottom: 1rem;
+
+    .header-info {
+      display: flex;
+      align-items: center;
+      padding-left: 1rem;
+    }
+
+    .header-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: $c-primary-dark;
+      font-family: $ff-bold;
+    }
+    .header-subtitle {
+      font-size: 14px;
+      color: $c-primary;
+      padding-left: 0.75rem;
+    }
+  }
+}
+
+.date-item-wrapper {
+  .MuiButtonBase-root {
+    background-color: transparent;
+    color: $c-primary-dark;
+  }
+  &.is-selected-date {
+    .MuiButtonBase-root {
+      background-color: $c-primary;
+      color: $c-white;
+    }
+  }
+}

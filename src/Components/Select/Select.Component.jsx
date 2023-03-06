@@ -58,15 +58,17 @@ export const SelectComponent = ({
         (startAdornment && ' with-start-andorment') || ''
       }${value && (!emptyItem || value !== emptyItem.value) ? ' select-filled' : ''}${
         ((overInputText || overInputTextIcon) && ' over-input-text-wrapper') || ''
-      }`}
-    >
+      }`}>
       {labelValue && (
-        <label
-          htmlFor={idRef}
-          className={`label-wrapper ${labelClasses}${isDisabled ? ' disabled' : ''}`}
-        >
-          {labelValue}
-        </label>
+        <div className='labels-wrapper'>
+          {labelValue && (
+            <label
+              htmlFor={idRef}
+              className={`label-wrapper ${labelClasses}${isDisabled ? ' disabled' : ''}`}>
+              {labelValue}
+            </label>
+          )}
+        </div>
       )}
       <div className='select-body-wrapper'>
         {(overInputText || overInputTextIcon) && (
@@ -83,6 +85,7 @@ export const SelectComponent = ({
           open={isOpen}
           onOpen={onOpen}
           placeholder={placeholder || undefined}
+          label={placeholder}
           onClose={onClose}
           multiple={multiple}
           defaultValue={defaultValue}
@@ -130,14 +133,12 @@ export const SelectComponent = ({
               }`}
             />
           )}
-          inputProps={{ readOnly: false }}
-        >
+          inputProps={{ readOnly: false }}>
           {emptyItem && (
             <MenuItem
               style={emptyItem.isHiddenOnOpen ? { display: 'none' } : {}}
               value={emptyItem.value}
-              disabled={emptyItem.isDisabled}
-            >
+              disabled={emptyItem.isDisabled}>
               {emptyItem.text}
             </MenuItem>
           )}
@@ -145,8 +146,7 @@ export const SelectComponent = ({
             <MenuItem
               style={selectAllItem.isHiddenOnOpen ? { display: 'none' } : {}}
               value={selectAllItem.value}
-              disabled={selectAllItem.isDisabled}
-            >
+              disabled={selectAllItem.isDisabled}>
               {isWithCheckAll && (
                 <CheckboxesComponent
                   idRef={`${idRef}allCheckbox`}
@@ -161,8 +161,7 @@ export const SelectComponent = ({
             <MenuItem
               style={item.isHiddenOnOpen ? { display: 'none' } : {}}
               value={valueInput ? item[valueInput] : item}
-              key={keyLoopBy && keyValue ? keyValue + item[keyLoopBy] : `selection${index + 1}`}
-            >
+              key={keyLoopBy && keyValue ? keyValue + item[keyLoopBy] : `selection${index + 1}`}>
               {getIsChecked && (
                 <CheckboxesComponent
                   idRef={`${idRef}Checkbox${index + 1}`}

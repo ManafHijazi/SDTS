@@ -1,6 +1,6 @@
 @import 'src/Assets/Styles/Helpers/Helpers.Style.scss';
 
-.courses-wrapper {
+.results-wrapper {
   background-color: white;
   box-shadow: $bs-primary;
 
@@ -15,6 +15,16 @@
       font-size: 20px;
       color: $c-primary;
       font-family: $ff-semibold;
+    }
+  }
+
+  .page-content {
+    padding: 2rem 1.5rem;
+
+    .field-title {
+      padding-bottom: 0.5rem;
+      font-size: 16px;
+      color: $c-black;
     }
   }
 }

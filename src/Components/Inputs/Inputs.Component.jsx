@@ -79,6 +79,7 @@ export const Inputs = memo(
     useEffect(() => {
       setIsBlurOrChanged(false);
     }, [isSubmitted]);
+
     useEffect(() => {
       if ((endAdornment || startAdornment) && onAdornmentsChanged) onAdornmentsChangedHandler();
     }, [endAdornment, onAdornmentsChanged, onAdornmentsChangedHandler, startAdornment]);
@@ -88,15 +89,13 @@ export const Inputs = memo(
         className={`input-wrapper ${wrapperClasses}${
           (startAdornment && ' with-start-andorment') || ''
         } ${themeClass}`}
-        ref={refs}
-      >
+        ref={refs}>
         {(labelValue || maxNumber !== undefined) && (
           <div className='labels-wrapper'>
             {labelValue && (
               <label
                 htmlFor={idRef}
-                className={`label-wrapper ${labelClasses}${isDisabled ? ' disabled' : ''}`}
-              >
+                className={`label-wrapper ${labelClasses}${isDisabled ? ' disabled' : ''}`}>
                 {labelValue}
               </label>
             )}
@@ -105,8 +104,7 @@ export const Inputs = memo(
                 htmlFor={idRef}
                 className={`max-label-wrapper ${maxLabelClasses || ''}${
                   isDisabled ? ' disabled' : ''
-                }`}
-              >
+                }`}>
                 <span>{t(`Shared:${maxLabel}`)}</span>
                 <span className='px-1'>{maxNumber}</span>
               </label>
@@ -116,8 +114,7 @@ export const Inputs = memo(
         <div
           className={`w-100 p-relative ${
             (isWithCharactersCounter && 'd-flex flex-wrap') || 'd-flex-center'
-          }`}
-        >
+          }`}>
           {beforeIconClasses && (
             <span className={`before-icon-classes-wrapper ${beforeIconClasses}`} />
           )}
@@ -212,8 +209,7 @@ export const Inputs = memo(
               <ButtonBase
                 className={`ml-2-reversed mt-1 ${buttonOptions.className}`}
                 onClick={buttonOptions.onActionClicked}
-                disabled={buttonOptions.isDisabled}
-              >
+                disabled={buttonOptions.isDisabled}>
                 <span className={buttonOptions.iconClasses} />
               </ButtonBase>
             )}
@@ -227,7 +223,7 @@ export const Inputs = memo(
         </div>
       </FormControl>
     );
-  },
+  }
 );
 
 Inputs.displayName = 'InputsComponent';
@@ -241,7 +237,7 @@ Inputs.propTypes = {
   onInputBlur: PropTypes.func,
   onKeyUp: PropTypes.func,
   onKeyDown: PropTypes.func,
-  idRef: PropTypes.string.isRequired,
+  idRef: PropTypes.string,
   isRequired: PropTypes.bool,
   isDisabled: PropTypes.bool,
   autoFocus: PropTypes.bool,

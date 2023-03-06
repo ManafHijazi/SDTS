@@ -1,75 +1,65 @@
-import React, { useEffect, useState } from 'react';
-import moment from 'moment';
+import React from 'react';
+import dayjs from 'dayjs';
 import PropTypes from 'prop-types';
 import { TextField } from '@mui/material';
-import DatePicker from '@mui/lab/DatePicker';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DesktopDatePicker, MobileDatePicker } from '@mui/x-date-pickers';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import './Datepicker.Style.scss';
 
 export const Datepicker = ({
   value,
   label,
   error,
-  maxDate,
   minDate,
+  maxDate,
+  isMobile,
   onChange,
   isDisabled,
   helperText,
   valueDateFormat,
-  inputPlaceholder,
+  ...props
 }) => {
-  const [localValue, setLocalValue] = useState(null);
-
-  useEffect(() => {
-    setLocalValue((value && moment(value, valueDateFormat).toDate()) || value);
-  }, [valueDateFormat, value]);
-
   return (
     <div className='date-picker-wrapper'>
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <DatePicker
-          label={label}
-          minDate={minDate}
-          maxDate={maxDate}
-          value={localValue}
-          rawValue={localValue}
-          disabled={isDisabled}
-          helperText={helperText}
-          placeholder={inputPlaceholder}
-          onChange={(newValue) => {
-            setLocalValue(newValue);
-            if (onChange) onChange(moment(newValue).format(valueDateFormat));
-          }}
-          renderInput={(params) => <TextField {...params} fullWidth error={error} />}
-        />
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        {isMobile ? (
+          <MobileDatePicker
+            {...props}
+            value={value}
+            label={label}
+            onChange={onChange}
+            disabled={isDisabled}
+            helperText={helperText}
+            inputFormat={valueDateFormat}
+            defaultValue={dayjs('2023-04-1')}
+            minDate={minDate || dayjs('1800-01-1')}
+            maxDate={maxDate || dayjs('2100-01-1')}
+            renderInput={(params) => <TextField {...params} fullWidth error={error} />}
+          />
+        ) : (
+          <DesktopDatePicker
+            {...props}
+            value={value}
+            label={label}
+            onChange={onChange}
+            disabled={isDisabled}
+            helperText={helperText}
+            inputFormat={valueDateFormat}
+            defaultValue={dayjs('2023-04-1')}
+            minDate={minDate || dayjs('1800-01-1')}
+            maxDate={maxDate || dayjs('2100-01-1')}
+            renderInput={(params) => <TextField {...params} fullWidth error={error} />}
+          />
+        )}
       </LocalizationProvider>
     </div>
   );
 };
 
 Datepicker.propTypes = {
-  error: PropTypes.bool,
-  value: PropTypes.string,
-  label: PropTypes.string,
-  onChange: PropTypes.func,
-  isDisabled: PropTypes.bool,
-  helperText: PropTypes.string,
-  valueDateFormat: PropTypes.string,
-  inputPlaceholder: PropTypes.string,
-  maxDate: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
-  minDate: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
+  isMobile: PropTypes.bool,
 };
 Datepicker.defaultProps = {
-  value: undefined,
-  label: undefined,
-  error: undefined,
-  maxDate: undefined,
-  minDate: new Date(),
-  onChange: undefined,
-  helperText: undefined,
-  isDisabled: undefined,
-  inputPlaceholder: undefined,
-  valueDateFormat: 'YYYY-MM-DD',
+  isMobile: false,
 };
-export default Datepicker;

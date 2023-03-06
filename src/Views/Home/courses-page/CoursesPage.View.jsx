@@ -1,7 +1,6 @@
-import React, {useState, useCallback, useEffect} from 'react';
-import {TablesComponent} from 'Components';
-import {ButtonBase, Tooltip} from '@mui/material';
-import {showError} from 'Helpers';
+import React, { useState, useCallback, useEffect } from 'react';
+import { TablesComponent } from 'Components';
+import { ButtonBase, Tooltip } from '@mui/material';
 import './CoursesPage.scss';
 
 const CoursesPageView = () => {
@@ -9,11 +8,11 @@ const CoursesPageView = () => {
   const [courses, setCourses] = useState({
     total_count: 0,
     results: [
-      {id: 1, user_name: 'testuser1', full_name: 'Test User 1', created_date: new Date()},
-      {id: 2, user_name: 'testuser2', full_name: 'Test User 2', created_date: new Date()},
-      {id: 3, user_name: 'testuser3', full_name: 'Test User 3', created_date: new Date()},
-      {id: 4, user_name: 'testuser4', full_name: 'Test User 4', created_date: new Date()},
-      {id: 5, user_name: 'testuser5', full_name: 'Test User 5', created_date: new Date()},
+      { id: 1, user_name: 'testuser1', full_name: 'Test User 1', created_date: new Date() },
+      { id: 2, user_name: 'testuser2', full_name: 'Test User 2', created_date: new Date() },
+      { id: 3, user_name: 'testuser3', full_name: 'Test User 3', created_date: new Date() },
+      { id: 4, user_name: 'testuser4', full_name: 'Test User 4', created_date: new Date() },
+      { id: 5, user_name: 'testuser5', full_name: 'Test User 5', created_date: new Date() },
     ],
   });
   const [filter, setFilter] = useState({
@@ -24,7 +23,7 @@ const CoursesPageView = () => {
   });
 
   const onPageIndexChanged = (newIndex) => {
-    setFilter((items) => ({...items, page: newIndex}));
+    setFilter((items) => ({ ...items, page: newIndex }));
   };
 
   const getAllCourses = useCallback(async () => {
@@ -33,7 +32,7 @@ const CoursesPageView = () => {
     const response = {};
 
     if (response && response.data && response.status === 200) {
-      const {data} = response;
+      const { data } = response;
 
       setCourses(data);
     } else {
@@ -52,15 +51,9 @@ const CoursesPageView = () => {
   }, [getAllCourses]);
 
   return (
-    <div className='trainers-wrapper view-wrapper'>
+    <div className='courses-wrapper view-wrapper'>
       <div className='page-header-wrapper'>
-        <div className='page-title'>Courses</div>
-        <div className='page-actions'>
-          <ButtonBase className='btns theme-primary c-white bg-secondary pr-3' onClick={() => { }}>
-            <span className='mdi mdi-plus pr-1' />
-            Register New Course
-          </ButtonBase>
-        </div>
+        <div className='page-title'>Utilities</div>
       </div>
 
       <TablesComponent
@@ -93,7 +86,7 @@ const CoursesPageView = () => {
             <>
               <Tooltip title='Edit'>
                 <ButtonBase
-                  className='btns-icon theme-primary mr-3 c-info'
+                  className='btns-icon theme-primary mr-3 c-primary'
                   onClick={(event) => {
                     event.preventDefault();
                     event.stopPropagation();
