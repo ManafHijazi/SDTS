@@ -203,13 +203,13 @@ const TrainersPageView = () => {
           },
           {
             id: 8,
-            label: 'ُRegistration Date',
+            label: 'Registration Date',
             input: 'registerationDate',
             isDate: true,
           },
           {
             id: 9,
-            label: 'ُStatus',
+            label: 'Status',
             input: 'status',
           },
         ]}
@@ -242,7 +242,7 @@ const TrainersPageView = () => {
         saveIdRef='studentSaveDialogBtnId'
         cancelIdRef='studentCancelDialogBtnId'
         wrapperClasses='student-dilaog-wrapper'
-        dialogTitle='Register New Student'
+        dialogTitle='Register New Trainer'
         dialogContent={
           <div className='dialog-content'>
             <div className='dialog-filed'>
@@ -288,13 +288,19 @@ const TrainersPageView = () => {
               />
             </div>
             <div className='dialog-filed'>
-              <Inputs
-                value={registerState.gender}
-                inputPlaceholder='Gender'
-                onInputChanged={(event) => {
-                  const { value } = event.target;
-                  setRegisterState((items) => ({ ...items, gender: value }));
+              <SelectComponent
+                data={[
+                  { key: 'Male', value: 'Male' },
+                  { key: 'Female', value: 'Female' },
+                ]}
+                value={registerState.gender || -1}
+                valueInput='key'
+                textInput='value'
+                defaultValue={-1}
+                onSelectChanged={(newValue) => {
+                  setRegisterState((items) => ({ ...items, gender: newValue }));
                 }}
+                emptyItem={{ value: -1, text: 'Gender', isHiddenOnOpen: true }}
               />
             </div>
             <div className='dialog-filed'>
@@ -354,18 +360,24 @@ const TrainersPageView = () => {
                   { key: 'Languages', value: 'Languages', isHiddenOnOpen: true },
                 ]}
                 multiple
-                value={['Languages', ...registerState.languages] || [-1]}
+                value={
+                  (registerState.languages.length > 0 && registerState.languages) || ['Languages']
+                }
                 valueInput='key'
                 textInput='value'
                 getIsChecked={(listItem) =>
                   registerState.languages.findIndex((el) => el === listItem.key) !== -1
                 }
-                defaultValue={-1}
                 placeholder='Languages'
                 onSelectChanged={(newValue) => {
-                  setRegisterState((items) => ({ ...items, languages: newValue }));
+                  setRegisterState((items) => {
+                    const localIndex = items.languages.findIndex((el) => el === 'Languages');
+
+                    items.languages.push(...newValue.splice(localIndex, 1));
+
+                    return { ...items };
+                  });
                 }}
-                emptyItem={{ key: -1, value: 'Languages', isHiddenOnOpen: true }}
               />
             </div>
             <div className='dialog-filed'>
@@ -422,18 +434,26 @@ const TrainersPageView = () => {
                   { key: 'License Type', value: 'License Type', isHiddenOnOpen: true },
                 ]}
                 multiple
-                value={['License Type', ...registerState.licenseType] || [-1]}
+                value={
+                  (registerState.licenseType.length > 0 && registerState.licenseType) || [
+                    'License Type',
+                  ]
+                }
                 valueInput='key'
                 textInput='value'
                 getIsChecked={(listItem) =>
                   registerState.licenseType.findIndex((el) => el === listItem.key) !== -1
                 }
-                defaultValue={-1}
                 placeholder='License Type'
                 onSelectChanged={(newValue) => {
-                  setRegisterState((items) => ({ ...items, licenseType: newValue }));
+                  setRegisterState((items) => {
+                    const localIndex = items.licenseType.findIndex((el) => el === 'License Type');
+
+                    items.licenseType.push(...newValue.splice(localIndex, 1));
+
+                    return { ...items };
+                  });
                 }}
-                emptyItem={{ key: -1, value: 'License Type', isHiddenOnOpen: true }}
               />
             </div>
             <div className='d-flex align-center w-100 pl-2 mb-4'>
@@ -452,18 +472,26 @@ const TrainersPageView = () => {
                     { key: 'Categories', value: 'Categories', isHiddenOnOpen: true },
                   ]}
                   multiple
-                  value={['Categories', ...registerState.categories] || [-1]}
+                  value={
+                    (registerState.categories.length > 0 && registerState.categories) || [
+                      'Categories',
+                    ]
+                  }
                   valueInput='key'
                   textInput='value'
                   getIsChecked={(listItem) =>
                     registerState.categories.findIndex((el) => el === listItem.key) !== -1
                   }
-                  defaultValue={-1}
                   placeholder='Categories'
                   onSelectChanged={(newValue) => {
-                    setRegisterState((items) => ({ ...items, categories: newValue }));
+                    setRegisterState((items) => {
+                      const localIndex = items.categories.findIndex((el) => el === 'Categories');
+
+                      items.categories.push(...newValue.splice(localIndex, 1));
+
+                      return { ...items };
+                    });
                   }}
-                  emptyItem={{ key: -1, value: 'Categories', isHiddenOnOpen: true }}
                 />
               </div>
               <div className='dialog-filed ml-2'>
@@ -479,18 +507,28 @@ const TrainersPageView = () => {
                     { key: 'Training Permit', value: 'Training Permit', isHiddenOnOpen: true },
                   ]}
                   multiple
-                  value={['Training Permit', ...registerState.trainingPermit] || [-1]}
+                  value={
+                    (registerState.trainingPermit.length > 0 && registerState.trainingPermit) || [
+                      'Training Permit',
+                    ]
+                  }
                   valueInput='key'
                   textInput='value'
                   getIsChecked={(listItem) =>
                     registerState.trainingPermit.findIndex((el) => el === listItem.key) !== -1
                   }
-                  defaultValue={-1}
                   placeholder='Training Permit'
                   onSelectChanged={(newValue) => {
-                    setRegisterState((items) => ({ ...items, trainingPermit: newValue }));
+                    setRegisterState((items) => {
+                      const localIndex = items.trainingPermit.findIndex(
+                        (el) => el === 'Training Permit'
+                      );
+
+                      items.trainingPermit.push(...newValue.splice(localIndex, 1));
+
+                      return { ...items };
+                    });
                   }}
-                  emptyItem={{ key: -1, value: 'Training Permit', isHiddenOnOpen: true }}
                 />
               </div>
             </div>

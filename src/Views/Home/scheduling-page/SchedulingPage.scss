@@ -30,6 +30,8 @@
     }
 
     .time-picker-wrapper {
+      position: relative;
+
       .MuiFormControl-root {
         width: 100%;
       }
@@ -45,6 +47,18 @@
       .MuiFormLabel-root {
         font-size: 14px;
         margin-top: -0.4rem;
+      }
+
+      .time-value {
+        top: 0.3rem;
+        left: 0.8rem;
+        position: absolute;
+        font-size: 12px;
+        color: $c-gray-primary;
+        background-color: $c-gray-light;
+        font-family: $ff-semibold;
+        font-weight: bold;
+        padding: 0.5rem 0;
       }
     }
 
@@ -81,7 +95,7 @@
     .header-info {
       display: flex;
       align-items: center;
-      padding-left: 1rem;
+      padding-bottom: 0.5rem;
     }
 
     .header-title {
@@ -93,7 +107,7 @@
     .header-subtitle {
       font-size: 14px;
       color: $c-primary;
-      padding-left: 0.75rem;
+      padding-left: 0.1rem;
     }
   }
 }

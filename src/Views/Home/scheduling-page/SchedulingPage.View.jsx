@@ -5,8 +5,8 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { CheckboxesComponent, Datepicker, Inputs, SelectComponent } from 'Components';
 import { ButtonBase, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import { MobileTimePicker, LocalizationProvider, PickersDay } from '@mui/x-date-pickers';
-import './SchedulingPage.scss';
 import { GlobalHistory } from 'Helpers';
+import './SchedulingPage.scss';
 
 const SchedulingPageView = () => {
   const [state, setState] = useState({
@@ -15,6 +15,7 @@ const SchedulingPageView = () => {
     gender: '',
     nationality: '',
     date: '',
+    time: '',
   });
   const [highlightedDays, setHighlightedDays] = useState([-1]);
   const [isFilteredApplied, setIsFilterApplied] = useState(false);
@@ -26,8 +27,6 @@ const SchedulingPageView = () => {
 
   const intersection = (a, b) => a.filter((value) => b.indexOf(value) !== -1);
 
-  const union = (a, b) => [...a, ...not(b, a)];
-
   const leftChecked = intersection(checked, left);
   const rightChecked = intersection(checked, right);
 
@@ -35,24 +34,15 @@ const SchedulingPageView = () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
 
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
+    if (leftChecked.length > 0) {
       newChecked.splice(currentIndex, 1);
-    }
+      newChecked.push(value);
+    } else newChecked.push(value);
 
     setChecked(newChecked);
   };
 
   const numberOfChecked = (items) => intersection(checked, items).length;
-
-  const handleToggleAll = (items) => () => {
-    if (numberOfChecked(items) === items.length) {
-      setChecked(not(checked, items));
-    } else {
-      setChecked(union(checked, items));
-    }
-  };
 
   const handleCheckedRight = () => {
     setRight(right.concat(leftChecked));
@@ -96,17 +86,6 @@ const SchedulingPageView = () => {
     <div className='list-item-wrapper'>
       <div className='card-header'>
         <div className='header-info'>
-          <CheckboxesComponent
-            onSelectedCheckboxClicked={handleToggleAll(items)}
-            singleChecked={numberOfChecked(items) === items.length && items.length !== 0}
-            singleIndeterminate={
-              numberOfChecked(items) !== items.length && numberOfChecked(items) !== 0
-            }
-            isDisabled={items.length === 0}
-            inputProps={{
-              'aria-label': 'all items selected',
-            }}
-          />
           <div className='header-title'>{title}</div>
         </div>
         <div className='header-subtitle'>{`${numberOfChecked(items)}/${
@@ -121,12 +100,9 @@ const SchedulingPageView = () => {
             <ListItem key={value} role='listitem' button onClick={handleToggle(value)}>
               <ListItemIcon>
                 <CheckboxesComponent
-                  singleChecked={checked.indexOf(value) !== -1}
-                  tabIndex={-1}
                   disableRipple
-                  inputProps={{
-                    'aria-labelledby': labelId,
-                  }}
+                  idRef='selectRequiredField'
+                  singleChecked={checked.indexOf(value) !== -1}
                 />
               </ListItemIcon>
               <ListItemText id={labelId} primary={`Trainer ${value + 1}`} />
@@ -236,7 +212,18 @@ const SchedulingPageView = () => {
 
           <div className='time-picker-wrapper mb-4 w-100'>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <MobileTimePicker label='Select Requiered Time' />
+              <MobileTimePicker
+                label='Select Requiered Time'
+                value={state.time}
+                onChange={(newValue) => setState((items) => ({ ...items, time: newValue }))}
+              />
+              {state.time && (
+                <div className='time-value'>
+                  {`${dayjs(state.time).format('HH:mm A')} - ${dayjs(state.time)
+                    .add(1, 'hour')
+                    .format('HH:mm A')}`}
+                </div>
+              )}
             </LocalizationProvider>
           </div>
 
@@ -288,7 +275,7 @@ const SchedulingPageView = () => {
               <ButtonBase
                 className='btns btns-icon theme-outline mb-2 c-primary'
                 onClick={handleCheckedRight}
-                disabled={leftChecked.length === 0}>
+                disabled={leftChecked.length === 0 || right.length > 0}>
                 <span className='mdi mdi-arrow-right' />
               </ButtonBase>
               <ButtonBase
